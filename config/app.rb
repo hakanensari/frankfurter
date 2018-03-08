@@ -6,7 +6,7 @@ require 'pathname'
 module App
   class << self
     def env
-      ENV['RACK_ENV'] || 'development'
+      ENV['APP_ENV'] || 'development'
     end
 
     def root

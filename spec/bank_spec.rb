@@ -12,7 +12,17 @@ describe Bank do
   end
 
   before do
+    VCR.insert_cassette 'feed'
     Currency.dataset.delete
+  end
+
+  after do
+    VCR.eject_cassette
+  end
+
+  it 'fetches all rates' do
+    Bank.fetch_all_rates!
+    Currency.count.must_be :positive?
   end
 
   it 'fetches current rates' do

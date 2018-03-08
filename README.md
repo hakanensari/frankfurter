@@ -4,8 +4,6 @@
 
 Fixer is a free API for current and historical foreign exchange rates [published by the European Central Bank](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html).
 
-A public instance of the API lives at [https://api.fixer.io](https://api.fixer.io). Alternatively, you can run  privately with the provided [Docker image](https://hub.docker.com/r/hakanensari/fixer/).
-
 Rates are updated around 4PM CET every working day.
 
 ## Usage
@@ -22,16 +20,22 @@ Get historical rates for any day since 1999.
 GET /2000-01-03
 ```
 
-Rates are quoted against the Euro by default. Quote against a different currency by setting the base parameter in your request.
+Rates quote against the Euro by default. Quote against a different currency.
 
 ```http
-GET /latest?base=USD
+GET /latest?from=USD
 ```
 
-Request specific exchange rates by setting the symbols parameter.
+Request specific exchange rates.
 
 ```http
-GET /latest?symbols=USD,GBP
+GET /latest?to=GBP
+```
+
+Change the amount requested.
+
+```http
+GET /latest?amount=100
 ```
 
 The primary use case is client side. For instance, with [money.js](https://openexchangerates.github.io/money.js/) in the browser
@@ -42,15 +46,13 @@ let demo = () => {
   alert("£1 = $" + rate.toFixed(4))
 }
 
-fetch('https://api.fixer.io/latest')
+fetch('https://api.example.com/latest')
   .then((resp) => resp.json())
   .then((data) => fx.rates = data.rates)
   .then(demo)
 ```
 
 ## Installation
-
-I have included a sample Docker Compose configuration in the repo.
 
 To build locally, type
 
@@ -64,7 +66,7 @@ Now you can access the API at
 http://localhost:8080
 ```
 
-In production, create a [`.env`](.env.example) file in the project root and run with
+In production, create a [`.env`](.env.example) file and run with
 
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d

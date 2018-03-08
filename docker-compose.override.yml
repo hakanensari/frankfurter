@@ -1,15 +1,13 @@
 version: '3'
 services:
   web:
-    build:
-      context: ./app
+    build: .
     environment:
-      RACK_ENV: development
+      APP_ENV: development
       VIRTUAL_HOST: localhost
     ports:
       - "8080:8080"
   scheduler:
-    build:
-      context: ./app
+    build: .
     environment:
-      RACK_ENV: development
+      APP_ENV: development

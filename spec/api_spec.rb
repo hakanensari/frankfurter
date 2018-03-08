@@ -22,8 +22,10 @@ describe 'the API' do
   end
 
   it 'sets base currency' do
+    get '/latest'
+    res = Oj.load(last_response.body)
     get '/latest?base=USD'
-    json['base'].must_equal 'USD'
+    json.wont_equal res
   end
 
   it 'sets base amount' do
@@ -33,16 +35,6 @@ describe 'the API' do
 
   it 'filters symbols' do
     get '/latest?symbols=USD'
-    json['rates'].keys.must_equal %w[USD]
-  end
-
-  it 'aliases base as from' do
-    get '/latest?from=USD'
-    json['base'].must_equal 'USD'
-  end
-
-  it 'aliases symbols as to' do
-    get '/latest?to=USD'
     json['rates'].keys.must_equal %w[USD]
   end
 

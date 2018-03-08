@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
+require_relative '../config/environment'
 
 require 'minitest/autorun'
+require 'minitest/around/spec'
 require 'vcr'
 require 'webmock'
 
-require 'fixer'
+begin
+  require 'pry'
+rescue LoadError # rubocop:disable Lint/HandleExceptions
+end
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'

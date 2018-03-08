@@ -3,7 +3,9 @@
 require 'oj'
 require 'sinatra'
 require 'rack/cors'
-require 'quote'
+
+require 'query'
+require 'quotation'
 
 use Rack::Cors do
   allow do
@@ -20,13 +22,20 @@ configure :production do
   disable :dump_errors
 end
 
+configure :test do
+  set :raise_errors, false
+end
+
 helpers do
-  def quote
-    @quote ||= Quote.new(params)
+  def quotation
+    @quotation ||= begin
+      query = Query.new(params)
+      Quotation.new(query.to_h)
+    end
   end
 
   def jsonp(data)
-    json = encode_json(data)
+    json = Oj.dump(data, mode: :compat)
     callback = params.delete('callback')
     if callback
       content_type :js
@@ -35,10 +44,6 @@ helpers do
       content_type :json
       json
     end
-  end
-
-  def encode_json(data)
-    Oj.dump(data, mode: :compat)
   end
 end
 
@@ -52,23 +57,23 @@ get '*' do
 end
 
 get '/' do
-  jsonp details: 'http://fixer.io'
+  jsonp source: 'https://github.com/hakanensari/fixer'
 end
 
 get '/latest' do
-  last_modified quote.date
-  jsonp quote.to_h
+  last_modified quotation.date
+  jsonp quotation.quote
 end
 
 get '/(?<date>\d{4}-\d{2}-\d{2})', mustermann_opts: { type: :regexp } do
-  last_modified quote.date
-  jsonp quote.to_h
+  last_modified quotation.date
+  jsonp quotation.quote
 end
 
 not_found do
-  halt 404, encode_json(error: 'Not found')
+  halt 404
 end
 
-error Quote::Invalid do |ex|
-  halt 422, encode_json(error: ex.message)
+error do
+  halt 422
 end
