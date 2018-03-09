@@ -46,7 +46,7 @@ let demo = () => {
   alert("£1 = $" + rate.toFixed(4))
 }
 
-fetch('https://api.example.com/latest')
+fetch('https://yourdomain.com/latest')
   .then((resp) => resp.json())
   .then((data) => fx.rates = data.rates)
   .then(demo)
@@ -66,8 +66,21 @@ Now you can access the API at
 http://localhost:8080
 ```
 
-In production, create a [`.env`](.env.example) file and run with
+In production, first create a `.env` file based on [`.env.example`](.env.example). Then, run with
 
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
+
+To update to a newer image
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml pull
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
+
+Within a few minutes, you will be able to access the API at
+
+```
+https://yourdomain.com:8080
 ```
