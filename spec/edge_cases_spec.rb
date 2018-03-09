@@ -7,8 +7,11 @@ require 'api'
 describe 'the API' do
   include Rack::Test::Methods
 
-  let(:app)  { Sinatra::Application }
-  let(:json) { Oj.load(last_response.body) }
+  let(:app) { Sinatra::Application }
+
+  def json
+    Oj.load(last_response.body)
+  end
 
   it 'handles unfound pages' do
     get '/foo'
@@ -35,12 +38,13 @@ describe 'the API' do
     last_response.must_be :unprocessable?
   end
 
-  it 'returns fresh dates' do
+  it 'does not return stale dates' do
     Currency.db.transaction do
-      new_date = Currency.order(Sequel.desc(:date)).first.date + 1
-      Currency.create(date: new_date, iso_code: 'FOO', rate: 1)
       get '/latest'
-      json['date'].must_equal new_date.to_s
+      date = json['date']
+      Currency.latest.delete
+      get '/latest'
+      json['date'].wont_equal date
       raise Sequel::Rollback
     end
   end
