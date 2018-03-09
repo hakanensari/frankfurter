@@ -16,7 +16,7 @@ class Quotation
   end
 
   def quote
-    { date: date, rates: calculate_rates }
+    { base: @base, date: date, rates: calculate_rates }
   end
 
   def date
