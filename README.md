@@ -38,6 +38,12 @@ Change the amount requested.
 GET /latest?amount=100
 ```
 
+Finally, use all the above together.
+
+```http
+GET /latest?from=EUR&to=GBP&amount=100
+```
+
 The primary use case is client side. For instance, with [money.js](https://openexchangerates.github.io/money.js/) in the browser
 
 ```js
