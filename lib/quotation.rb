@@ -32,7 +32,7 @@ class Quotation
 
     return rates if @base == DEFAULT_BASE && @amount == 1.0
 
-    if @symbols.nil? || @symbols.include?(DEFAULT_BASE)
+    if @symbols.nil? || @symbols.include?(DEFAULT_BASE) || @base == DEFAULT_BASE
       rates.update(DEFAULT_BASE => 1.0)
     end
     divisor = rates.delete(@base)

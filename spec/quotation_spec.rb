@@ -42,4 +42,12 @@ describe Quotation do
       rates['USD'].must_be :>, 10
     end
   end
+
+  describe 'when given an amount and symbols' do
+    it 'quotes for that amount' do
+      quotation = Quotation.new(amount: 100, symbols: ['USD'])
+      rates = quotation.quote[:rates]
+      rates['USD'].must_be :>, 10
+    end
+  end
 end
