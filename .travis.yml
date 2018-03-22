@@ -1,11 +1,15 @@
-language: ruby
+dist: trusty
 sudo: false
 
+language: ruby
 rvm:
   - 2.5.0
-env:
-  - APP_ENV=test
 
-bundler_args: "--without development"
+addons:
+  postgresql: "9.6"
 before_install:
   - "psql -c 'create database fixer_test;' -U postgres"
+
+bundler_args: "--without development"
+env:
+  - APP_ENV=test
