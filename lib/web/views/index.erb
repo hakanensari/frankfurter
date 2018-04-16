@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Frankfurter provides an open-source API for current and historical foreign exchange rates and currency conversion. The API tracks rates published daily by the European Central Bank.">
+    <title>Frankfurter</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <link rel="stylesheet" href="/stylesheets/application.css">
+    <link rel="shortcut icon" href="/images/frankfurter-icon.png">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand">
+      <div class="container">
+        <ul class="navbar-nav mx-sm-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html" target="_blank">Data sets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://status.frankfurter.app/" target="_blank">Status</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/hakanensari/frankfurter" target="_blank">Source</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <section class="hero section">
+      <div class="container">
+        <h1 class="display-4">Frankfurter</h1>
+        <p class="lead">
+          Foreign exchange rates and currency conversion API
+        </p>
+        <img alt="" class="logo" src="/images/frankfurter.png">
+      </div>
+    </section>
+
+    <section class="introduction section">
+      <div class="container">
+        <p>
+          Frankfurter is a lightweight API for querying current and historical forex rates published by the European Central Bank.
+        </p>
+        <p>
+          Rates update around 4PM CET on every working day. Historical data goes back to early 1999.
+        </p>
+      </div>
+    </section>
+
+    <section class="usage section">
+      <div class="container">
+        <h5>Usage</h5>
+        <p>
+          Get current foreign exchange rates.
+        </p>
+        <pre><code class="http hljs small">GET /current <i>HTTP/1.1</i></code></pre>
+        <p>
+          Get historical rates for any day since 1999.
+        </p>
+        <pre><code class="http hljs small">GET /1999-12-31 <i>HTTP/1.1</i></code></pre>
+        <p>
+          Rates are quoted against the Euro by default. Quote against a different
+          currency by setting the <strong>from</strong> parameter in your request.
+        </p>
+        <pre><code class="http hljs small">GET /current?from=USD <i>HTTP/1.1</i></code></pre>
+        <p>
+          Request specific exchange rates by setting the <strong>to</strong> parameter.
+        </p>
+        <pre><code class="http hljs small">GET /current?to=USD,GBP <i>HTTP/1.1</i></code></pre>
+        <p>
+          Convert a specific value.
+        </p>
+        <pre><code class="http hljs small">GET /current?amount=1000&from=GBP&to=EUR <i>HTTP/1.1</i></code></pre>
+      </div>
+    </section>
+    <section class="best-practices section">
+      <div class="container">
+        <h5>Best Practices</h5>
+        <p>
+          The primary use case of Frankfurter is client side. If you are converting currencies in the browser, you will appreciate the unencumbered access currently not possible with similar commercial services.
+        </p>
+        <pre><code class="js hljs small">// Fetch and display GBP/USD
+fetch('/current?from=GBP&to=USD')
+  .then(resp => resp.json())
+  .then((data) => { alert(`GBP/USD = ${data.rates.USD}`); });</code></pre>
+        <p>
+          If you are working with rates on the server side, download them off the European Central Bank to avoid unnecessary indirection.
+        </p>
+        <p>
+          If you require more currencies or granular data, you are better off going with a commercial service.
+        </p>
+        <p>
+          Cache results whenever possible.
+        </p>
+      </div>
+    </section>
+    <section class="best-practices section">
+      <div class="container">
+        <h5>Notes</h5>
+        <p>
+          This project started out as <strong>Fixer</strong> in 2013. I renamed it to <strong>Frankfurter</strong> after selling the <a href="https://fixer.io" target="_blank">original domain</a> in early 2018.
+        <p>
+          The API is open source and comes with no warranty.
+        </p>
+      </div>
+    </section>
+    <section class="footer section">
+      <div class="container">
+        <iframe src="https://ghbtns.com/github-btn.html?user=hakanensari&repo=frankfurter&type=star&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+      </div>
+    </section>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/javascripts/application.js"></script>
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=fixerio" id="_carbonads_js"></script>
+  </body>
+</html>
+

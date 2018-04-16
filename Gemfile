@@ -2,7 +2,7 @@
 
 source 'http://rubygems.org'
 
-ruby '2.5.0'
+ruby '2.5.1'
 
 gem 'oj'
 gem 'ox'
@@ -14,7 +14,12 @@ gem 'sinatra'
 gem 'unicorn'
 
 group :development do
+  gem 'guard'
+  gem 'guard-livereload'
+  gem 'guard-minitest'
   gem 'pry'
+  gem 'rack-livereload'
+  gem 'shotgun'
 end
 
 group :test do

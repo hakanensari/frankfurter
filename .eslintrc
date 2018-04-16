@@ -1,0 +1,16 @@
+{
+  "extends": ["airbnb-standard"],
+  "globals": {
+    "fetch": true,
+    "hljs": true
+  },
+  "rules": {
+    "no-new-func": [
+      "off"
+    ],
+    "no-param-reassign": [
+      "error",
+      { "props": false }
+    ]
+  }
+}

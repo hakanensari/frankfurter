@@ -3,12 +3,12 @@ sudo: false
 
 language: ruby
 rvm:
-  - 2.5.0
+  - 2.5
 
 addons:
   postgresql: "9.6"
 before_install:
-  - "psql -c 'create database fixer_test;' -U postgres"
+  - "psql -c 'create database frankfurter_test;' -U postgres"
 
 bundler_args: "--without development"
 env:

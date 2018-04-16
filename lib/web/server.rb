@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require 'oj'
-require 'sinatra'
 require 'rack/cors'
+require 'sinatra'
 
 require 'query'
-require 'quotation'
+require 'quote'
 
 use Rack::Cors do
   allow do
@@ -27,16 +27,17 @@ configure :test do
 end
 
 helpers do
-  def quotation
-    @quotation ||= begin
+  def quote
+    @quote ||= begin
       query = Query.new(params)
-      Quotation.new(query.to_h)
+      Quote.new(query.to_h)
     end
   end
 
-  def jsonp(data)
+  def json(data)
     json = Oj.dump(data, mode: :compat)
     callback = params.delete('callback')
+
     if callback
       content_type :js
       "#{callback}(#{json})"
@@ -52,22 +53,27 @@ options '*' do
 end
 
 get '*' do
-  cache_control :public, :must_revalidate, max_age: 900
+  cache_control :public
   pass
 end
 
 get '/' do
-  jsonp source: 'https://github.com/hakanensari/fixer'
+  erb :index
 end
 
-get '/latest' do
-  last_modified quotation.date
-  jsonp quotation.quote
+get '/(?:latest|current)', mustermann_opts: { type: :regexp } do
+  last_modified quote.date
+  json quote.to_h
 end
 
 get '/(?<date>\d{4}-\d{2}-\d{2})', mustermann_opts: { type: :regexp } do
-  last_modified quotation.date
-  jsonp quotation.quote
+  last_modified quote.date
+  json quote.to_h
+end
+
+get '/(?<start_date>\d{4}-\d{2}-\d{2})\.\.(?<end_date>\d{4}-\d{2}-\d{2})', mustermann_opts: { type: :regexp } do
+  last_modified quote.end_date
+  json quote.to_h
 end
 
 not_found do

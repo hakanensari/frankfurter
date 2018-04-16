@@ -2,7 +2,7 @@
 
 require 'currency'
 
-class Quotation
+class Quote
   DEFAULT_BASE = 'EUR'
 
   def initialize(amount: 1.0,
@@ -15,7 +15,7 @@ class Quotation
     @symbols = symbols
   end
 
-  def quote
+  def to_h
     { base: @base, date: date, rates: calculate_rates }
   end
 

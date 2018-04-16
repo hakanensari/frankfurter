@@ -2,7 +2,7 @@
 
 require_relative 'helper'
 require 'rack/test'
-require 'api'
+require 'web/server'
 
 describe 'the API' do
   include Rack::Test::Methods
