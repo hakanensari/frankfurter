@@ -12,5 +12,5 @@ namespace :db do
     Sequel::IntegerMigrator.new(db, dir, opts).run
   end
 
-  task setup: %w[db:migrate rates:reload]
+  task setup: %w[db:migrate rates:all]
 end

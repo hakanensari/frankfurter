@@ -7,6 +7,6 @@ require 'rufus-scheduler'
 
 scheduler = Rufus::Scheduler.new
 scheduler.cron '*/15 15,16,17 * * 1-5', timeout: '1m' do
-  system 'rake rates:update'
+  system 'rake rates:current'
 end
 scheduler.join
