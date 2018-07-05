@@ -49,17 +49,10 @@ describe 'the server' do
     json['rates'].wont_be :empty?
   end
 
-  it 'returns a cache control header' do
-    %w[/ /current /2012-11-20].each do |path|
-      get path
-      headers['Cache-Control'].wont_be_nil
-    end
-  end
-
-  it 'returns a last modified header' do
+  it 'returns an ETag' do
     %w[/current /2012-11-20].each do |path|
       get path
-      headers['Last-Modified'].wont_be_nil
+      headers['ETag'].wont_be_nil
     end
   end
 
@@ -88,8 +81,8 @@ describe 'the server' do
 
   it 'returns rates for a given period' do
     get '/2010-01-01..2010-12-31'
-    json['start_date'].must_equal '2010-01-01'
-    json['end_date'].must_equal '2010-12-31'
-    json['rates'].wont_be empty
+    json['start_date'].wont_be :empty?
+    json['end_date'].wont_be :empty?
+    json['rates'].wont_be :empty?
   end
 end

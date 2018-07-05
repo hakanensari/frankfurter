@@ -15,6 +15,10 @@ use Rack::Cors do
 end
 
 configure :development do
+  require 'rack-livereload'
+
+  use Rack::LiveReload
+
   set :show_exceptions, :after_handler
 end
 
@@ -27,11 +31,28 @@ configure :test do
 end
 
 helpers do
-  def quote
-    @quote ||= begin
-      query = Query.new(params)
-      Quote.new(query.to_h)
+  def end_of_day_quote
+    @end_of_day_quote ||= begin
+      quote = Quote::EndOfDay.new(query)
+      quote.perform
+      halt 404 if quote.not_found?
+
+      quote
     end
+  end
+
+  def interval_quote
+    @interval_quote ||= begin
+      quote = Quote::Interval.new(query)
+      quote.perform
+      halt 404 if quote.not_found?
+
+      quote
+    end
+  end
+
+  def query
+    Query.new(params).to_h
   end
 
   def json(data)
@@ -52,28 +73,25 @@ options '*' do
   200
 end
 
-get '*' do
-  cache_control :public
-  pass
-end
-
 get '/' do
   erb :index
 end
 
 get '/(?:latest|current)', mustermann_opts: { type: :regexp } do
-  last_modified quote.date
-  json quote.to_h
+  params[:date] = Date.today.to_s
+  etag end_of_day_quote.cache_key
+  json end_of_day_quote.formatted
 end
 
 get '/(?<date>\d{4}-\d{2}-\d{2})', mustermann_opts: { type: :regexp } do
-  last_modified quote.date
-  json quote.to_h
+  etag end_of_day_quote.cache_key
+  json end_of_day_quote.formatted
 end
 
-get '/(?<start_date>\d{4}-\d{2}-\d{2})\.\.(?<end_date>\d{4}-\d{2}-\d{2})', mustermann_opts: { type: :regexp } do
-  last_modified quote.end_date
-  json quote.to_h
+get '/(?<start_date>\d{4}-\d{2}-\d{2})\.\.(?<end_date>\d{4}-\d{2}-\d{2})',
+    mustermann_opts: { type: :regexp } do
+  etag interval_quote.cache_key
+  json interval_quote.formatted
 end
 
 not_found do

@@ -25,7 +25,7 @@ describe 'the API' do
 
   it 'will not process a date before 2000' do
     get '/1999-01-01'
-    last_response.must_be :unprocessable?
+    last_response.must_be :not_found?
   end
 
   it 'will not process an invalid base' do

@@ -9,7 +9,7 @@ describe Query do
     query.amount.must_equal 100.0
   end
 
-  it 'defaults amount to nothin' do
+  it 'defaults amount to nothing' do
     query = Query.new
     query.amount.must_be_nil
   end
@@ -24,7 +24,7 @@ describe Query do
     query.base.must_be_nil
   end
 
-  it 'aliases base as from' do
+  it 'aliases base with from' do
     query = Query.new(from: 'USD')
     query.base.must_equal 'USD'
   end
@@ -34,7 +34,7 @@ describe Query do
     query.symbols.must_equal %w[USD GBP]
   end
 
-  it 'aliases symbols to to' do
+  it 'aliases symbols with to' do
     query = Query.new(to: 'USD')
     query.symbols.must_equal ['USD']
   end
@@ -45,12 +45,15 @@ describe Query do
   end
 
   it 'returns given date' do
-    query = Query.new(date: '2014-01-01')
-    query.date.must_equal '2014-01-01'
+    date = '2014-01-01'
+    query = Query.new(date: date)
+    query.date.must_equal Date.parse(date)
   end
 
-  it 'defaults date to nothing' do
-    query = Query.new
-    query.date.must_be_nil
+  it 'returns given date interval' do
+    start_date = '2014-01-01'
+    end_date = '2014-12-31'
+    query = Query.new(start_date: start_date, end_date: end_date)
+    query.date.must_equal((Date.parse(start_date)..Date.parse(end_date)))
   end
 end

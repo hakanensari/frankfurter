@@ -6,19 +6,24 @@ class Query
   end
 
   def amount
-    @params[:amount].to_f if @params[:amount] # rubocop:disable Style/SafeNavigation
+    return unless @params[:amount]
+    @params[:amount].to_f
   end
 
   def base
-    @params.values_at(:base, :from).compact.first&.upcase
+    @params.values_at(:from, :base).compact.first&.upcase
   end
 
   def symbols
-    @params.values_at(:symbols, :to).compact.first&.split(',')
+    @params.values_at(:to, :symbols).compact.first&.split(',')
   end
 
   def date
-    @params[:date]
+    if @params[:date]
+      Date.parse(@params[:date])
+    else
+      (Date.parse(@params[:start_date])..Date.parse(@params[:end_date]))
+    end
   end
 
   def to_h

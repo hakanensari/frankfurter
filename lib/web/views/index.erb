@@ -7,43 +7,43 @@
     <title>Frankfurter</title>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600">
     <link rel="stylesheet" href="/stylesheets/application.css">
-    <link rel="shortcut icon" href="/images/frankfurter-icon.png">
+    <link rel="shortcut icon" href="/images/favicon.ico">
   </head>
   <body>
     <nav class="navbar navbar-expand">
       <div class="container">
-        <ul class="navbar-nav mx-sm-auto">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/hakanensari/frankfurter" target="_blank">Source code</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="https://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html" target="_blank">Data sets</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://status.frankfurter.app/" target="_blank">Status</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://github.com/hakanensari/frankfurter" target="_blank">Source</a>
-          </li>
         </ul>
       </div>
     </nav>
     <section class="hero section">
       <div class="container">
+        <image class="logo" src="/images/frankfurter.png" alt="">
         <h1 class="display-4">Frankfurter</h1>
         <p class="lead">
           Foreign exchange rates and currency conversion API
         </p>
-        <img alt="" class="logo" src="/images/frankfurter.png">
       </div>
     </section>
 
     <section class="introduction section">
       <div class="container">
         <p>
-          Frankfurter is a lightweight API for querying current and historical forex rates published by the European Central Bank.
+          Frankfurter is an open-source API for current and historical forex rates published by the European Central Bank.
         </p>
         <p>
-          Rates update around 4PM CET on every working day. Historical data goes back to early 1999.
+          The API updates rates around 4PM CET every working day. Historical data goes back to early 1999.
         </p>
       </div>
     </section>
@@ -58,7 +58,11 @@
         <p>
           Get historical rates for any day since 1999.
         </p>
-        <pre><code class="http hljs small">GET /1999-12-31 <i>HTTP/1.1</i></code></pre>
+        <pre><code class="http hljs small">GET /2000-01-01 <i>HTTP/1.1</i></code></pre>
+        <p>
+          Get historical exchange rates for a given time period.
+        </p>
+        <pre><code class="http hljs small">GET /2000-01-01..2000-12-31 <i>HTTP/1.1</i></code></pre>
         <p>
           Rates are quoted against the Euro by default. Quote against a different
           currency by setting the <strong>from</strong> parameter in your request.
@@ -69,9 +73,9 @@
         </p>
         <pre><code class="http hljs small">GET /current?to=USD,GBP <i>HTTP/1.1</i></code></pre>
         <p>
-          Convert a specific value.
+          Convert a specific value using <strong>amount</strong>.
         </p>
-        <pre><code class="http hljs small">GET /current?amount=1000&from=GBP&to=EUR <i>HTTP/1.1</i></code></pre>
+        <pre><code class="http hljs small">GET /current?amount=1000 <i>HTTP/1.1</i></code></pre>
       </div>
     </section>
     <section class="best-practices section">
@@ -110,9 +114,9 @@ fetch('/current?from=GBP&to=USD')
         <iframe src="https://ghbtns.com/github-btn.html?user=hakanensari&repo=frankfurter&type=star&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
       </div>
     </section>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script src="/javascripts/application.js"></script>
-    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=fixerio" id="_carbonads_js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="/javascripts/application.js"></script>
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7D45QM&placement=frankfurterapp" id="_carbonads_js"></script>
   </body>
 </html>
 

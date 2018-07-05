@@ -3,6 +3,6 @@ AllCops:
 Documentation:
   Enabled: false
 Metrics/BlockLength:
-  Enabled: false
-Metrics/LineLength:
-  Enabled: false
+  ExcludedMethods: ['describe', 'helpers']
+Metrics/MethodLength:
+  Max: 11

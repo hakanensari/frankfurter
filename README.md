@@ -8,10 +8,10 @@ Rates are updated around 4PM CET every working day.
 
 ## Usage
 
-Get the latest foreign exchange rates.
+Get the current foreign exchange rates.
 
 ```http
-GET /latest
+GET /current
 ```
 
 Get historical rates for any day since 1999.
@@ -23,25 +23,25 @@ GET /2000-01-03
 Rates quote against the Euro by default. Quote against a different currency.
 
 ```http
-GET /latest?from=USD
+GET /current?from=USD
 ```
 
 Request specific exchange rates.
 
 ```http
-GET /latest?to=GBP
+GET /current?to=GBP
 ```
 
-Change the amount requested.
+Change the converted amount.
 
 ```http
-GET /latest?amount=100
+GET /current?amount=100
 ```
 
 Finally, use all the above together.
 
 ```http
-GET /latest?from=EUR&to=GBP&amount=100
+GET /current?from=EUR&to=GBP&amount=100
 ```
 
 The primary use case is client side. For instance, with [money.js](https://openexchangerates.github.io/money.js/) in the browser
@@ -52,7 +52,7 @@ let demo = () => {
   alert("£1 = $" + rate.toFixed(4))
 }
 
-fetch('https://yourdomain.com/latest')
+fetch('https://yourdomain.com/current')
   .then((resp) => resp.json())
   .then((data) => fx.rates = data.rates)
   .then(demo)
