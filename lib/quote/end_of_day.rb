@@ -6,7 +6,10 @@ require 'quote/base'
 module Quote
   class EndOfDay < Base
     def formatted
-      { base: base, date: result.keys.first, rates: result.values.first }
+      { amount: amount,
+        base: base,
+        date: result.keys.first,
+        rates: result.values.first }
     end
 
     def cache_key
