@@ -6,12 +6,12 @@ ruby '2.5.1'
 
 gem 'oj'
 gem 'ox'
+gem 'puma'
 gem 'rack-cors'
 gem 'rake'
 gem 'rufus-scheduler'
 gem 'sequel_pg'
 gem 'sinatra'
-gem 'unicorn'
 
 group :development do
   gem 'guard'

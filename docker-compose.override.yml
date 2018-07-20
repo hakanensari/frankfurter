@@ -6,7 +6,7 @@ services:
       APP_ENV: development
       VIRTUAL_HOST: localhost
     ports:
-      - "8080:8080"
+      - "3000:3000"
   scheduler:
     build: .
     environment:

@@ -5,12 +5,12 @@ services:
     volumes:
       - data:/var/lib/postgresql/data
   web:
-    command: unicorn -c config/unicorn.rb
+    command: puma -C config/puma.rb
     entrypoint: bin/wait-for-it.sh db:5432 -s --
     environment:
       DATABASE_URL: postgres://postgres@db/postgres
     expose:
-      - '8080'
+      - '3000'
     links:
       - db
   scheduler:

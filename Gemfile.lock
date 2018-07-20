@@ -39,7 +39,6 @@ GEM
     hashdiff (0.3.7)
     http_parser.rb (0.6.0)
     jaro_winkler (1.4.0)
-    kgio (2.11.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -66,6 +65,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (3.0.2)
+    puma (3.11.4)
     raabro (1.1.5)
     rack (2.0.5)
     rack-cors (1.0.2)
@@ -76,7 +76,6 @@ GEM
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rainbow (3.0.0)
-    raindrops (0.19.0)
     rake (12.3.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
@@ -112,9 +111,6 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     unicode-display_width (1.4.0)
-    unicorn (5.4.0)
-      kgio (~> 2.6)
-      raindrops (~> 0.7)
     vcr (4.0.0)
     webmock (3.4.2)
       addressable (>= 2.3.6)
@@ -133,6 +129,7 @@ DEPENDENCIES
   oj
   ox
   pry
+  puma
   rack-cors
   rack-livereload
   rack-test
@@ -142,7 +139,6 @@ DEPENDENCIES
   sequel_pg
   shotgun
   sinatra
-  unicorn
   vcr
   webmock
 
