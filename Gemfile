@@ -10,15 +10,12 @@ gem 'puma'
 gem 'rack-cors'
 gem 'rake'
 gem 'rufus-scheduler'
+gem 'sass'
 gem 'sequel_pg'
 gem 'sinatra'
 
 group :development do
-  gem 'guard'
-  gem 'guard-livereload'
-  gem 'guard-minitest'
   gem 'pry'
-  gem 'rack-livereload'
   gem 'shotgun'
 end
 

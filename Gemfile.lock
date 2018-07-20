@@ -7,53 +7,19 @@ GEM
     coderay (1.1.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
-    em-websocket (0.5.1)
-      eventmachine (>= 0.12.9)
-      http_parser.rb (~> 0.6.0)
     et-orbi (1.1.2)
       tzinfo
-    eventmachine (1.2.7)
     ffi (1.9.25)
-    formatador (0.2.5)
     fugit (1.1.1)
       et-orbi (~> 1.1, >= 1.1.1)
       raabro (~> 1.1)
-    guard (2.14.2)
-      formatador (>= 0.2.4)
-      listen (>= 2.7, < 4.0)
-      lumberjack (>= 1.0.12, < 2.0)
-      nenv (~> 0.1)
-      notiffany (~> 0.0)
-      pry (>= 0.9.12)
-      shellany (~> 0.0)
-      thor (>= 0.18.1)
-    guard-compat (1.2.1)
-    guard-livereload (2.5.2)
-      em-websocket (~> 0.5)
-      guard (~> 2.8)
-      guard-compat (~> 1.0)
-      multi_json (~> 1.8)
-    guard-minitest (2.4.6)
-      guard-compat (~> 1.2)
-      minitest (>= 3.0)
     hashdiff (0.3.7)
-    http_parser.rb (0.6.0)
     jaro_winkler (1.4.0)
-    listen (3.1.5)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-      ruby_dep (~> 1.2)
-    lumberjack (1.0.13)
     method_source (0.9.0)
     minitest (5.11.3)
     minitest-around (0.4.1)
       minitest (~> 5.0)
-    multi_json (1.13.1)
     mustermann (1.0.2)
-    nenv (0.3.0)
-    notiffany (0.1.1)
-      nenv (~> 0.1)
-      shellany (~> 0.0)
     oj (3.6.2)
     ox (2.9.2)
     parallel (1.12.1)
@@ -69,8 +35,6 @@ GEM
     raabro (1.1.5)
     rack (2.0.5)
     rack-cors (1.0.2)
-    rack-livereload (0.3.17)
-      rack
     rack-protection (2.0.2)
       rack
     rack-test (1.0.0)
@@ -89,15 +53,18 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.9.0)
-    ruby_dep (1.5.0)
     rufus-scheduler (3.5.0)
       fugit (~> 1.1, >= 1.1.1)
     safe_yaml (1.0.4)
+    sass (3.5.6)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
     sequel (5.9.0)
     sequel_pg (1.8.2)
       pg (>= 0.18.0)
       sequel (>= 4.34.0)
-    shellany (0.0.1)
     shotgun (0.9.2)
       rack (>= 1.0)
     sinatra (2.0.2)
@@ -105,7 +72,6 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.2)
       tilt (~> 2.0)
-    thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
     tzinfo (1.2.5)
@@ -121,9 +87,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  guard
-  guard-livereload
-  guard-minitest
   minitest
   minitest-around
   oj
@@ -131,11 +94,11 @@ DEPENDENCIES
   pry
   puma
   rack-cors
-  rack-livereload
   rack-test
   rake
   rubocop
   rufus-scheduler
+  sass
   sequel_pg
   shotgun
   sinatra
@@ -146,4 +109,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
