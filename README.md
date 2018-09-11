@@ -73,7 +73,7 @@ To build locally, type
 docker-compose up -d
 ```
 
-Now you can access the API at `http://localhost:8080`.
+Now you can access the API at `http://localhost:3000`.
 
 In production, create a [`.env`](.env.example) file and run with
 
