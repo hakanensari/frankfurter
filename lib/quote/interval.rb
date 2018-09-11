@@ -15,6 +15,7 @@ module Quote
 
     def cache_key
       return if not_found?
+
       Digest::MD5.hexdigest(result.keys.last)
     end
 

@@ -7,6 +7,7 @@ class Query
 
   def amount
     return unless @params[:amount]
+
     @params[:amount].to_f
   end
 
