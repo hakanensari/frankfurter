@@ -47,7 +47,7 @@ module Bank
     end
 
     def url
-      URI("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-#{@scope}.xml")
+      URI("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-#{@scope}.xml")
     end
   end
 end
