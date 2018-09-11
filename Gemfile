@@ -15,8 +15,11 @@ gem 'sequel_pg'
 gem 'sinatra'
 
 group :development do
-  gem 'pry'
   gem 'shotgun'
+end
+
+group :development, :test do
+  gem 'pry'
 end
 
 group :test do

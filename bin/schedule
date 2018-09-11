@@ -1,12 +1,18 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-system 'rake db:setup'
+`rake db:setup`
 
 require 'rufus-scheduler'
 
 scheduler = Rufus::Scheduler.new
-scheduler.cron '*/15 15,16,17 * * 1-5', timeout: '1m' do
-  system 'rake rates:current'
+
+trap 'INT' do
+  scheduler.shutdown
 end
+
+scheduler.cron '*/15 15,16,17 * * 1-5' do
+  `rake rates:current`
+end
+
 scheduler.join
