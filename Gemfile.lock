@@ -44,6 +44,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    redcarpet (3.4.0)
     rubocop (0.57.0)
       jaro_winkler (~> 1.4.0)
       parallel (~> 1.10)
@@ -96,6 +97,7 @@ DEPENDENCIES
   rack-cors
   rack-test
   rake
+  redcarpet
   rubocop
   rufus-scheduler
   sass
@@ -109,4 +111,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.2
+   1.16.4

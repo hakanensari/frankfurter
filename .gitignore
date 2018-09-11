@@ -1,5 +1,6 @@
+*.css*
 .bundle
 .env
 .sass-cache
 pkg
-public/stylesheets/*.css*
+

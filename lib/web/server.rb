@@ -2,6 +2,7 @@
 
 require 'oj'
 require 'rack/cors'
+require 'redcarpet'
 require 'sass/plugin/rack'
 require 'sinatra'
 
@@ -15,10 +16,10 @@ use Rack::Cors do
   end
 end
 
-Sass::Plugin.options[:style] = :compressed
+css_location = File.join(Sinatra::Application.public_folder, 'stylesheets')
+Sass::Plugin.options.update css_location: css_location,
+                            style: :compressed
 use Sass::Plugin::Rack
-
-set :static_cache_control, [:public, max_age: 60]
 
 configure :development do
   set :show_exceptions, :after_handler
@@ -33,12 +34,12 @@ configure :test do
 end
 
 helpers do
-  def versioned_stylesheet(stylesheet)
-    "/stylesheets/#{stylesheet}.css?" + File.mtime(File.join(Sinatra::Application.public_folder, 'stylesheets', 'sass', "#{stylesheet}.scss")).to_i.to_s
-  end
-
   def versioned_javascript(javascript)
-    "/javascripts/#{javascript}.js?" + File.mtime(File.join(Sinatra::Application.public_folder, 'javascripts', "#{javascript}.js")).to_i.to_s
+    version = File.mtime(File.join(Sinatra::Application.public_folder,
+                                   'javascripts',
+                                   "#{javascript}.js")).to_i.to_s
+
+    "/javascripts/#{javascript}.js?#{version}"
   end
 
   def end_of_day_quote
@@ -84,7 +85,13 @@ options '*' do
 end
 
 get '/' do
-  erb :index
+  # FIXME: We should cache this in production.
+  parser = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+                                   disable_indented_code_blocks: true,
+                                   fenced_code_blocks: true)
+  content = parser.render(File.read('README.md'))
+
+  erb :index, locals: { content: content }
 end
 
 get '/(?:latest|current)', mustermann_opts: { type: :regexp } do

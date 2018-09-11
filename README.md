@@ -2,63 +2,70 @@
 
 [![Travis](https://travis-ci.org/hakanensari/frankfurter.svg)](https://travis-ci.org/hakanensari/frankfurter)
 
-Frankfurter is a free API for current and historical foreign exchange rates [published by the European Central Bank](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html).
+Foreign exchange (forex) rates and currency conversion API
+
+## Getting Started
+
+Frankfurter is a free, open source API for current and historical foreign exchange rates. It tracks data published by the European Central Bank.
 
 Rates are updated around 4PM CET every working day.
 
-## Usage
+## Examples
 
 Get the current foreign exchange rates.
 
 ```http
-GET /current
+GET /latest HTTP/1.1
 ```
 
 Get historical rates for any day since 1999.
 
 ```http
-GET /2000-01-03
+GET /2000-01-03 HTTP/1.1
+```
+
+Get historical rates for a time period.
+
+```http
+GET /2010-01-01..2010-01-31 HTTP/1.1
 ```
 
 Rates quote against the Euro by default. Quote against a different currency.
 
 ```http
-GET /current?from=USD
+GET /latest?from=USD HTTP/1.1
 ```
 
 Request specific exchange rates.
 
 ```http
-GET /current?to=GBP
+GET /latest?to=USD,GBP HTTP/1.1
 ```
 
-Change the converted amount.
+Convert a specific amount.
 
 ```http
-GET /current?amount=100
+GET /latest?amount=1000&from=GBP&to=USD HTTP/1.1
 ```
 
-Finally, use all the above together.
+With a full list of currencies, time series grow large in size. For better performance, use the to parameter to reduce the response weight.
 
 ```http
-GET /current?from=EUR&to=GBP&amount=100
+GET /2016-01-01..2016-12-31?from=GBP&to=USD HTTP/1.1
 ```
 
-The primary use case is client side. For instance, with [money.js](https://openexchangerates.github.io/money.js/) in the browser
+Here we return the current GBP/USD currency pair with JavaScript.
 
 ```js
-let demo = () => {
-  let rate = fx(1).from("GBP").to("USD")
-  alert("£1 = $" + rate.toFixed(4))
-}
-
-fetch('https://yourdomain.com/current')
-  .then((resp) => resp.json())
-  .then((data) => fx.rates = data.rates)
-  .then(demo)
+// Fetch and display GBP/USD
+fetch('/latest?from=GBP&to=USD')
+  .then(resp => resp.json())
+  .then((data) => { alert(`GBPUSD = ${data.rates.USD}`); });
 ```
 
-## Installation
+Cache data whenever possible.
+
+## Deployment
 
 To build locally, type
 
@@ -66,27 +73,19 @@ To build locally, type
 docker-compose up -d
 ```
 
-Now you can access the API at
+Now you can access the API at `http://localhost:8080`.
 
-```
-http://localhost:8080
-```
-
-In production, first create a `.env` file based on [`.env.example`](.env.example). Then, run with
+In production, create a [`.env`](.env.example) file and run with
 
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-To update to a newer image
+To update to a newer image, run
 
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml pull
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-Within a few minutes, you will be able to access the API at
-
-```
-https://yourdomain.com:8080
-```
+Within a few minutes, you will access the API at `https://yourdomain.com`.
