@@ -6,7 +6,7 @@ Foreign exchange (forex) rates and currency conversion API
 
 ## Getting Started
 
-Frankfurter is a free, open source API for current and historical foreign exchange rates. It tracks data published by the European Central Bank.
+Frankfurter is a free and open source API for current and historical foreign exchange rates. It tracks data published by the European Central Bank.
 
 Rates are updated around 4PM CET every working day.
 

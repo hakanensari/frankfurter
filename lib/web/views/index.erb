@@ -10,9 +10,29 @@
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" href="/stylesheets/application.css">
-    <link rel="shortcut icon" href="/images/icon.png">
+    <link rel="shortcut icon" href="/images/frankfurter.png">
+    <link rel="apple-touch-icon" href="/images/frankfurter-solid.png">
+
     <% if ENV['GA_TRACKING_ID'] %>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+    <script>
+      window.addEventListener("load", function(){
+      window.cookieconsent.initialise({
+        "palette": {
+          "popup": {
+            "background": "#d94f33"
+          },
+          "button": {
+            "background": "#8f1911"
+          }
+        },
+        "content": {
+          "message": "This site uses cookies for analytics. By continuing to browse this site, you agree to this use."
+        }
+      })});
+    </script>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-36475354-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -22,6 +42,7 @@
       gtag('config', <%= ENV['GA_TRACKING_ID'] %>);
     </script>
     <% end %>
+
   </head>
   <body>
 
@@ -64,8 +85,8 @@
 
     <div class="footer">
       <div class="container">
-        <p class="small">
-          <i class="far fa-heart"></i> Frankfurter
+        <p>
+          <i class="far fa-heart"></i> Frankfurter 2012-<%= Date.today.year %>
         </p>
       </div>
     </div>
