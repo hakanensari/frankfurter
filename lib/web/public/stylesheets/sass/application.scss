@@ -8,15 +8,13 @@ body {
     .nav-link {
       color: #fff;
       margin-bottom: 2em;
-      padding-left: 12px;
-      padding-right: 12px;
 
       &:hover {
         text-decoration: underline;
       }
 
       .fa-fw {
-        margin-right: 6px;
+        margin-right: 3px;
       }
     }
   }
