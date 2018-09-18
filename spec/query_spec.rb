@@ -19,6 +19,11 @@ describe Query do
     query.base.must_equal 'USD'
   end
 
+  it 'upcases given base' do
+    query = Query.new(base: 'usd')
+    query.base.must_equal 'USD'
+  end
+
   it 'defaults base to nothing' do
     query = Query.new
     query.base.must_be_nil
@@ -31,6 +36,11 @@ describe Query do
 
   it 'returns given symbols' do
     query = Query.new(symbols: 'USD,GBP')
+    query.symbols.must_equal %w[USD GBP]
+  end
+
+  it 'upcases given symbols' do
+    query = Query.new(symbols: 'usd,gbp')
     query.symbols.must_equal %w[USD GBP]
   end
 

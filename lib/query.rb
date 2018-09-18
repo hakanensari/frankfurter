@@ -16,7 +16,7 @@ class Query
   end
 
   def symbols
-    @params.values_at(:to, :symbols).compact.first&.split(',')
+    @params.values_at(:to, :symbols).compact.first&.upcase&.split(',')
   end
 
   def date
