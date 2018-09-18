@@ -85,4 +85,11 @@ describe 'the server' do
     json['end_date'].wont_be :empty?
     json['rates'].wont_be :empty?
   end
+
+  it 'returns rates when given period does not include end date' do
+    get '/2010-01-01..'
+    json['start_date'].wont_be :empty?
+    json['end_date'].wont_be :empty?
+    json['rates'].wont_be :empty?
+  end
 end

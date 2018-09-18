@@ -93,8 +93,9 @@ get '/(?<date>\d{4}-\d{2}-\d{2})', mustermann_opts: { type: :regexp } do
   json end_of_day_quote.formatted
 end
 
-get '/(?<start_date>\d{4}-\d{2}-\d{2})\.\.(?<end_date>\d{4}-\d{2}-\d{2})',
+get '/(?<start_date>\d{4}-\d{2}-\d{2})\.\.(?<end_date>\d{4}-\d{2}-\d{2})?',
     mustermann_opts: { type: :regexp } do
+  @params[:end_date] ||= Date.today.to_s
   etag interval_quote.cache_key
   json interval_quote.formatted
 end

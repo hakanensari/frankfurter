@@ -30,6 +30,12 @@ Get historical rates for a time period.
 GET /2010-01-01..2010-01-31 HTTP/1.1
 ```
 
+Get historical rates for a time period up to the present.
+
+```http
+GET /2010-01-01.. HTTP/1.1
+```
+
 Rates quote against the Euro by default. Quote against a different currency.
 
 ```http
