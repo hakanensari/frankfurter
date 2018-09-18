@@ -34,14 +34,6 @@ configure :test do
 end
 
 helpers do
-  def versioned_javascript(javascript)
-    version = File.mtime(File.join(Sinatra::Application.public_folder,
-                                   'javascripts',
-                                   "#{javascript}.js")).to_i.to_s
-
-    "/javascripts/#{javascript}.js?#{version}"
-  end
-
   def end_of_day_quote
     @end_of_day_quote ||= begin
       quote = Quote::EndOfDay.new(query)
@@ -78,10 +70,6 @@ helpers do
       json
     end
   end
-end
-
-options '*' do
-  200
 end
 
 get '/' do
