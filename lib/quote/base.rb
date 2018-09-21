@@ -64,19 +64,18 @@ module Quote
 
     def rebase_rates
       result.each do |date, rates|
-        add_euro(rates)
-
+        rates['EUR'] = amount if symbols.nil? || symbols.include?('EUR')
         divisor = rates.delete(base)
-        result[date] = rates.sort
-                            .map! do |iso_code, rate|
-                              [iso_code, round(amount * rate / divisor)]
-                            end
-                            .to_h
+        if rates.empty?
+          result.delete(date)
+        else
+          result[date] = rates.sort
+                              .map! do |iso_code, rate|
+                                [iso_code, round(amount * rate / divisor)]
+                              end
+                              .to_h
+        end
       end
-    end
-
-    def add_euro(rates)
-      rates['EUR'] = amount if symbols.nil? || symbols.include?('EUR')
     end
   end
 end

@@ -34,11 +34,9 @@ module Quote
     end
 
     describe 'when given data' do
-      let(:klass) do
-        Class.new(Base) do
-          def fetch_data
-            []
-          end
+      before do
+        def quote.fetch_data
+          []
         end
       end
 
@@ -49,6 +47,27 @@ module Quote
       it 'performs only once' do
         quote.perform
         refute quote.perform
+      end
+    end
+
+    describe 'when rebasing and converting to an unavailable currency' do
+      let(:date) do
+        Date.today
+      end
+
+      let(:quote) do
+        klass.new(date: date, base: 'USD', symbols: ['FOO'])
+      end
+
+      before do
+        def quote.fetch_data
+          [{ date: date, iso_code: 'USD', rate: 1.2 }]
+        end
+      end
+
+      it 'finds nothing' do
+        quote.perform
+        quote.not_found?.must_equal true
       end
     end
   end

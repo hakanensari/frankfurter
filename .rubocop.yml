@@ -4,5 +4,7 @@ Documentation:
   Enabled: false
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'helpers']
+Metrics/AbcSize:
+  Max: 20.45
 Metrics/MethodLength:
-  Max: 11
+  Max: 13
