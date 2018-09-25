@@ -21,9 +21,12 @@ body {
   }
 }
 
-.content {
-  margin-bottom: 2em;
+.container {
   max-width: 720px;
+}
+
+.header {
+  margin-bottom: 2em;
 
   .logo {
     img {
@@ -34,33 +37,31 @@ body {
 
   .logo,
   h1,
-  h1+p+p {
+  h2 {
+    color: #FFF;
     text-align: center;
   }
 
   h1 {
     font-size: 56px;
+  }
 
+  h2 {
+    font-size: 20px;
+    margin-bottom: 2em;
+  }
+}
+
+.content {
+  h1 {
+    &,
     &+p {
       display: none;
     }
-
-    &+p+p {
-      margin-bottom: 2em;
-    }
-
-    &,
-    &+p+p {
-      color: #FFF;
-    }
   }
 
-  h1+p+p,
   h2 {
     font-size: 20px;
-  }
-
-  h2 {
     font-weight: bold;
   }
 }
@@ -89,6 +90,6 @@ code:not(.hljs) {
 
 .footer {
   color: #FFF;
-  margin: 2em 0;
+  margin: 2em auto;
   text-align: center;
 }

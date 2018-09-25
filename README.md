@@ -2,13 +2,10 @@
 
 [![Travis](https://travis-ci.org/hakanensari/frankfurter.svg)](https://travis-ci.org/hakanensari/frankfurter)
 
-Foreign exchange (forex) rates and currency conversion API
+Frankfurter is a free and open source API for current and historical foreign exchange rates. It tracks data published by the European Central Bank. Rates are updated around 4PM CET every working day.
 
-## Getting Started
+A public instance of the API is hosted on `https://frankfurter.app`. Alternatively, you can self-host a private instance using the provided Docker image.
 
-Frankfurter is a free and open source API for current and historical foreign exchange rates. It tracks data published by the European Central Bank.
-
-Rates are updated around 4PM CET every working day.
 
 ## Examples
 
@@ -91,7 +88,6 @@ To update to a newer image, run
 
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml pull
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-Within a few minutes, you will access the API at `https://yourdomain.com`.
+Within a few minutes, you will access the API at `https://yourdomain.com/`.

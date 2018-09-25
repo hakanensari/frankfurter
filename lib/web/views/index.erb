@@ -1,20 +1,79 @@
-  <!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Frankfurter is an open source API for current and historical foreign exchange rates. It tracks rates published daily by the European Central Bank.">
     <title>Foreign exchange rates and currency conversion API | Frankfurter</title>
+    <link rel="canonical" href="https://frankfurter.app/">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" href="/stylesheets/application.css">
     <link rel="shortcut icon" href="/images/frankfurter.png">
-    <link rel="apple-touch-icon" href="/images/frankfurter-solid.png">
-
     <% if ENV['GA_TRACKING_ID'] %>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-36475354-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '<%= ENV['GA_TRACKING_ID'] %>');
+    </script>
+    <% end %>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand">
+      <div class="container">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/hakanensari/frankfurter">
+              <i class="fab fa-github fa-fw fa-lg"></i><span class="d-none d-sm-inline">Source</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://hub.docker.com/r/hakanensari/frankfurter/">
+              <i class="fab fa-docker fa-fw fa-lg"></i><span class="d-none d-sm-inline">Image</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html">
+              <i class="fas fa-file-alt fa-fw fa-lg"></i><span class="d-none d-sm-inline">Data sets</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://status.frankfurter.app/">
+              <i class="fas fa-signature fa-fw fa-lg"></i><span class="d-none d-sm-inline">Status</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <header class="header container">
+      <div class="logo">
+        <image src="/images/frankfurter.png" alt="">
+      </div>
+      <h1>Frankfurter</h1>
+      <h2>Foreign exchange (forex) rates and currency conversion API</h2>
+    </header>
+
+    <div class="content container">
+      <%= content %>
+    </div>
+
+    <footer class="footer container">
+      <p class="small">
+        <i class="far fa-heart"></i> Frankfurter 2012-<%= Date.today.year %>
+      </p>
+    </footer>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="/javascripts/application.js"></script>
+    <% if ENV['GA_TRACKING_ID'] %>
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
     <script>
       window.addEventListener("load", function(){
@@ -32,67 +91,7 @@
         }
       })});
     </script>
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-36475354-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', '<%= ENV['GA_TRACKING_ID'] %>');
-    </script>
     <% end %>
-
-  </head>
-  <body>
-
-    <nav class="navbar navbar-expand">
-      <div class="container">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="https://github.com/hakanensari/frankfurter">
-              <i class="fab fa-github fa-fw fa-lg"></i><span class="d-none d-sm-inline">Source</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="https://hub.docker.com/r/hakanensari/frankfurter/">
-              <i class="fab fa-docker fa-fw fa-lg"></i><span class="d-none d-sm-inline">Image</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html">
-              <i class="fas fa-file-alt fa-fw fa-lg"></i><span class="d-none d-sm-inline">Data sets</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="https://status.frankfurter.app/">
-              <i class="fas fa-signature fa-fw fa-lg"></i><span class="d-none d-sm-inline">Status</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="content container">
-      <div class="logo">
-        <image src="/images/frankfurter.png" alt="">
-      </div>
-      <%= content %>
-    </div>
-
-    <div class="footer">
-      <div class="container">
-        <p class="small">
-          <i class="far fa-heart"></i> Frankfurter 2012-<%= Date.today.year %>
-        </p>
-      </div>
-    </div>
-
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script type="text/javascript" src="/javascripts/application.js"></script>
   </body>
 </html>
 

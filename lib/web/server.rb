@@ -33,6 +33,8 @@ configure :test do
   set :raise_errors, false
 end
 
+set :static_cache_control, [:public, max_age: 300]
+
 helpers do
   def end_of_day_quote
     @end_of_day_quote ||= begin
