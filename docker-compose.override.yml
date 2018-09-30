@@ -7,7 +7,3 @@ services:
       VIRTUAL_HOST: localhost
     ports:
       - "8080:8080"
-  scheduler:
-    build: .
-    environment:
-      APP_ENV: development

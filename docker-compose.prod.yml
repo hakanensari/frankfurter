@@ -10,14 +10,6 @@ services:
         max-size: "50m"
         max-file: "10"
     restart: unless-stopped
-  scheduler:
-    env_file: .env
-    image: hakanensari/frankfurter
-    logging:
-      options:
-        max-size: "50m"
-        max-file: "10"
-    restart: unless-stopped
   nginx-proxy:
     image: jwilder/nginx-proxy
     labels:

@@ -13,12 +13,5 @@ services:
       - '8080'
     links:
       - db
-  scheduler:
-    command: bin/schedule
-    entrypoint: bin/wait-for-it.sh db:5432 -s --
-    environment:
-      DATABASE_URL: postgres://postgres@db/postgres
-    links:
-      - db
 volumes:
   data:

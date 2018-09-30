@@ -6,6 +6,12 @@ preload_app true
 worker_processes worker_process_count
 timeout 10
 
-before_fork do |_, _|
+initialized = false
+before_fork do |_server, _worker|
   Sequel::DATABASES.each(&:disconnect)
+  unless initialized
+    require 'scheduler'
+    Scheduler.start
+    initialized = true
+  end
 end
