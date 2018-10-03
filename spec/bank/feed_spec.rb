@@ -15,35 +15,33 @@ module Bank
 
     it 'fetches current rates' do
       feed = Feed.current
-      feed.count.must_be :<, 40
+      feed.count.must_be :==, 1
     end
 
     it 'fetches rates for the past 90 days' do
       feed = Feed.ninety_days
-      feed.count.must_be :>, 33 * 60
+      feed.count.must_be :>, 1
+      feed.count.must_be :<=, 90
     end
 
     it 'fetches historical rates' do
       feed = Feed.historical
-      feed.count.must_be :>, 33 * 3000
+      feed.count.must_be :>, 90
     end
 
-    it 'parses the date of a currency' do
+    it 'parses dates' do
       feed = Feed.current
-      currency = feed.first
-      currency[:date].must_be_kind_of Date
+      day = feed.first
+      day[:date].must_be_kind_of Date
     end
 
-    it 'parse the ISO code of a currency' do
+    it 'parses rates' do
       feed = Feed.current
-      currency = feed.first
-      currency[:iso_code].must_be_kind_of String
-    end
-
-    it 'parses the rate of a currency' do
-      feed = Feed.current
-      currency = feed.first
-      currency[:rate].must_be_kind_of Float
+      day = feed.first
+      day[:rates].each do |iso_code, value|
+        iso_code.must_be_kind_of String
+        value.must_be_kind_of Float
+      end
     end
   end
 end

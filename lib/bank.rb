@@ -1,27 +1,41 @@
 # frozen_string_literal: true
 
-require 'currency'
+require 'day'
 require 'bank/feed'
 
 module Bank
-  def self.fetch_all!
-    Currency.dataset.insert_conflict.multi_insert(Feed.historical.to_a)
-  end
+  class << self
+    def fetch_all!
+      data = Feed.historical.to_a
+      jsonify!(data)
+      Day.dataset.insert_conflict.multi_insert(data)
+    end
 
-  def self.fetch_ninety_days!
-    Currency.dataset.insert_conflict.multi_insert(Feed.ninety_days.to_a)
-  end
+    def fetch_ninety_days!
+      data = Feed.ninety_days.to_a
+      jsonify!(data)
+      Day.dataset.insert_conflict.multi_insert(data)
+    end
 
-  def self.fetch_current!
-    Currency.db.transaction do
-      Feed.current.each do |hsh|
-        Currency.find_or_create(hsh)
+    def fetch_current!
+      data = Feed.current.to_a
+      jsonify!(data)
+      Day.find_or_create(data.first)
+    end
+
+    def replace_all!
+      data = Feed.historical.to_a
+      jsonify!(data)
+      Day.dataset.delete
+      Day.multi_insert(data)
+    end
+
+    private
+
+    def jsonify!(data)
+      data.each do |day|
+        day[:rates] = Sequel.pg_jsonb(day[:rates])
       end
     end
-  end
-
-  def self.replace_all!
-    Currency.dataset.delete
-    Currency.multi_insert(Feed.historical.to_a)
   end
 end

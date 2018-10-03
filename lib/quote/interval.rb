@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'currency'
 require 'quote/base'
 
 module Quote
@@ -22,8 +21,10 @@ module Quote
     private
 
     def fetch_data
+      require 'currency'
+
       scope = Currency.between(date)
-      scope = scope.where(iso_code: symbols + [base]) if symbols
+      scope = scope.only(*(symbols + [base])) if symbols
 
       scope.naked
     end

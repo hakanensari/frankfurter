@@ -3,7 +3,7 @@ AllCops:
 Documentation:
   Enabled: false
 Metrics/BlockLength:
-  ExcludedMethods: ['describe', 'helpers']
+  ExcludedMethods: ['dataset_module', 'describe', 'helpers']
 Metrics/AbcSize:
   Max: 20.45
 Metrics/MethodLength:

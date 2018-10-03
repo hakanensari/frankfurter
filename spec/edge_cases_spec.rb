@@ -4,7 +4,7 @@ require_relative 'helper'
 require 'rack/test'
 require 'web/server'
 
-describe 'the API' do
+describe 'the server' do
   include Rack::Test::Methods
 
   let(:app) { Sinatra::Application }
@@ -39,10 +39,10 @@ describe 'the API' do
   end
 
   it 'does not return stale dates' do
-    Currency.db.transaction do
+    Day.db.transaction do
       get '/latest'
       date = json['date']
-      Currency.latest.delete
+      Day.latest.delete
       get '/latest'
       json['date'].wont_equal date
       raise Sequel::Rollback

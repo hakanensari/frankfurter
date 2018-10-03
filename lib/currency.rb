@@ -1,30 +1,36 @@
 # frozen_string_literal: true
 
-class Currency < Sequel::Model
+require 'day'
+require 'forwardable'
+
+class Currency < Sequel::Model(Day.currencies)
+  class << self
+    extend Forwardable
+
+    def_delegators :dataset, :latest, :between
+  end
+
   dataset_module do
-    def latest(date = Date.today)
-      where(date: select(:date).where(Sequel.lit('date <= ?', date))
-                               .order(Sequel.desc(:date))
-                               .limit(1))
+    def only(*iso_codes)
+      where(iso_code: iso_codes)
     end
 
-    def between(date_interval)
-      query = where(date: date_interval).order(:date)
-      length = date_interval.last - date_interval.first
-      if length > 365
-        query.sampled('month')
-      elsif length > 90
-        query.sampled('week')
-      else
-        query
+    def between(interval)
+      case interval.last - interval.first
+      when 0..90 then super
+      when 91..365 then super.sample('week')
+      else super.sample('month')
       end
     end
 
-    def sampled(precision)
-      sampled_date = Sequel.lit("date_trunc('#{precision}', date)")
-      select(:iso_code).select_append { avg(rate).as(rate) }
-                       .select_append(sampled_date.as(:date))
-                       .group(:iso_code, sampled_date)
+    def sample(precision)
+      sampler = Sequel.function(:date_trunc, precision, :date)
+
+      select(:iso_code)
+        .select_append { avg(rate).as(rate) }
+        .select_append(sampler.as(:date))
+        .group(:iso_code, sampler)
+        .order(:date)
     end
   end
 end
