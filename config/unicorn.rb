@@ -10,8 +10,8 @@ initialized = false
 before_fork do |_server, _worker|
   Sequel::DATABASES.each(&:disconnect)
   unless initialized
-    require 'scheduler'
-    Scheduler.start
+    require 'scheduler/daemon'
+    Scheduler::Daemon.start
     initialized = true
   end
 end
