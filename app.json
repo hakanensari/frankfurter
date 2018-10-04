@@ -1,26 +1,16 @@
 
 {
   "name": "Frankfurter",
-  "description": "A foreign exchange rates and currency conversion API",
+  "description": "Foreign exchange rates and currency conversion API",
   "website": "https://frankfurter.app",
   "repository": "https://github.com/hakanensari/frankfurter",
   "logo": "https://frankfurter.app/images/frankfurter.png",
   "keywords": [
-    "forex",
-    "foreign exchange rates",
+    "exchange rate",
     "currency",
-    "api"
+    "conversion"
   ],
-  "env": {
-    "APP_ENV": {
-      "description": "The app environment.",
-      "value": "production",
-    }
-  },
   "addons": [
     "heroku-postgresql"
-  ],
-  "scripts": {
-    "postdeploy": "bundle exec rake db:migrate rates:ninety_days"
-  }
+  ]
 }

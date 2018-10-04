@@ -26,11 +26,12 @@ body {
 }
 
 .header {
-  margin-bottom: 2em;
+  margin-bottom: 4em;
+  text-align: center;
 
   .logo {
     img {
-      padding-bottom: 1em;
+      margin-bottom: 1em;
       width: 150px;
     }
   }
@@ -39,7 +40,6 @@ body {
   h1,
   h2 {
     color: #FFF;
-    text-align: center;
   }
 
   h1 {
@@ -48,7 +48,25 @@ body {
 
   h2 {
     font-size: 20px;
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
+  }
+
+  .btn {
+    background-color: #002B36;
+    color: #2AA198;
+
+    &:hover {
+      background-color: #001A25;
+    }
+
+    strong {
+      font-weight: normal;
+    }
+
+    .fas,
+    strong {
+      color: #6EE5DB;
+    }
   }
 }
 
@@ -64,6 +82,10 @@ body {
     font-size: 20px;
     font-weight: bold;
   }
+
+  p:last-child {
+    display: none;
+  }
 }
 
 code:not(.hljs) {
@@ -71,9 +93,9 @@ code:not(.hljs) {
 }
 
 .hljs {
-  border-radius: 3px;
+  border-radius: 4px;
   font-size: 13px;
-  padding: 10px;
+  padding: 9px 12px;
 
   &.http {
     color: #2D4A53;
