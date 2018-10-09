@@ -4,8 +4,7 @@
 
 Frankfurter is a free and open source API for current and historical foreign exchange rates. It tracks data published by the European Central Bank. Rates are updated around 4PM CET every working day.
 
-We host a public instance on `https://frankfurter.app`. Alternatively, you can deploy a private instance using the provided Docker image.
-
+A public instance runs on `https://frankfurter.app`. You can also self-host with Heroku or Docker.
 
 ## Examples
 
