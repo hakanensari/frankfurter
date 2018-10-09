@@ -17,6 +17,7 @@ gem 'unicorn'
 
 group :development do
   gem 'shotgun'
+  gem 'sitemap_generator'
 end
 
 group :development, :test do

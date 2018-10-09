@@ -4,6 +4,7 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     ast (2.4.0)
+    builder (3.2.3)
     coderay (1.1.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -74,6 +75,8 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.4)
       tilt (~> 2.0)
+    sitemap_generator (6.0.1)
+      builder (~> 3.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
     tzinfo (1.2.5)
@@ -107,6 +110,7 @@ DEPENDENCIES
   sequel_pg
   shotgun
   sinatra
+  sitemap_generator
   unicorn
   vcr
   webmock

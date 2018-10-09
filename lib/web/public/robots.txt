@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://frankfurter.app/sitemap.xml.gz
