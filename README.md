@@ -32,6 +32,12 @@ Get historical rates for a time period up to the present.
 GET /2010-01-01.. HTTP/1.1
 ```
 
+Get a list of available currency symbols, along with their full names.
+
+```http
+GET /currencies HTTP/1.1
+```
+
 Rates quote against the Euro by default. Quote against a different currency.
 
 ```http

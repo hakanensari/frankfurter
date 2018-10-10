@@ -16,25 +16,25 @@ describe 'the server' do
     last_response.must_be :ok?
   end
 
-  it 'returns current quotes' do
-    get '/current'
+  it 'returns latest quotes' do
+    get '/latest'
     last_response.must_be :ok?
   end
 
   it 'sets base currency' do
-    get '/current'
+    get '/latest'
     res = Oj.load(last_response.body)
-    get '/current?from=USD'
+    get '/latest?from=USD'
     json.wont_equal res
   end
 
   it 'sets base amount' do
-    get '/current?amount=10'
+    get '/latest?amount=10'
     json['rates']['USD'].must_be :>, 10
   end
 
   it 'filters symbols' do
-    get '/current?to=USD'
+    get '/latest?to=USD'
     json['rates'].keys.must_equal %w[USD]
   end
 
@@ -50,14 +50,14 @@ describe 'the server' do
   end
 
   it 'returns an ETag' do
-    %w[/current /2012-11-20].each do |path|
+    %w[/latest /2012-11-20].each do |path|
       get path
       headers['ETag'].wont_be_nil
     end
   end
 
   it 'allows cross-origin requests' do
-    %w[/ /current /2012-11-20].each do |path|
+    %w[/ /latest /2012-11-20].each do |path|
       header 'Origin', '*'
       get path
       assert headers.key?('Access-Control-Allow-Methods')
@@ -65,7 +65,7 @@ describe 'the server' do
   end
 
   it 'responds to preflight requests' do
-    %w[/ /current /2012-11-20].each do |path|
+    %w[/ /latest /2012-11-20].each do |path|
       header 'Origin', '*'
       header 'Access-Control-Request-Method', 'GET'
       header 'Access-Control-Request-Headers', 'Content-Type'
@@ -75,7 +75,7 @@ describe 'the server' do
   end
 
   it 'converts an amount' do
-    get '/current?from=GBP&to=USD&amount=100'
+    get '/latest?from=GBP&to=USD&amount=100'
     json['rates']['USD'].must_be :>, 100
   end
 
@@ -91,5 +91,10 @@ describe 'the server' do
     json['start_date'].wont_be :empty?
     json['end_date'].wont_be :empty?
     json['rates'].wont_be :empty?
+  end
+
+  it 'returns currencies' do
+    get '/currencies'
+    json['USD'].must_equal 'United States Dollar'
   end
 end

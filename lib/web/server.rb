@@ -6,6 +6,7 @@ require 'redcarpet'
 require 'sass/plugin/rack'
 require 'sinatra'
 
+require 'currency_names'
 require 'query'
 require 'quote'
 
@@ -100,6 +101,12 @@ get '/(?<start_date>\d{4}-\d{2}-\d{2})\.\.(?<end_date>\d{4}-\d{2}-\d{2})?',
   @params[:end_date] ||= Date.today.to_s
   etag interval_quote.cache_key
   json interval_quote.formatted
+end
+
+get '/currencies' do
+  currency_names = CurrencyNames.new
+  etag currency_names.cache_key
+  json currency_names.formatted
 end
 
 not_found do

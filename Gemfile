@@ -4,6 +4,7 @@ source 'http://rubygems.org'
 
 ruby '2.5.1'
 
+gem 'money'
 gem 'oj'
 gem 'ox'
 gem 'rack-cors'
