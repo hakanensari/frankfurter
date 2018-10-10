@@ -6,10 +6,19 @@ rvm:
   - 2.5
 
 addons:
-  postgresql: "9.6"
+  postgresql: 10
 before_install:
   - "psql -c 'create database frankfurter_test;' -U postgres"
 
-bundler_args: "--without development"
+services:
+  - docker
+
+bundler_args: "--without development test"
 env:
   - APP_ENV=test
+
+deploy:
+  provider: script
+  script: bash bin/docker_push
+  on:
+    branch: master
