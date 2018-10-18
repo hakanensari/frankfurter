@@ -2,9 +2,9 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/hakanensari/frankfurter)
 
-Frankfurter is a free and open source API for current and historical foreign exchange rates. It tracks data published by the European Central Bank. Rates are updated around 4PM CET every working day.
+Frankfurter is a free and open source API for current and historical foreign exchange rates. It tracks data published by the European Central Bank. Rates update around 4PM CET every working day.
 
-A public instance runs on `https://frankfurter.app`. You can also self-host with Heroku or Docker.
+Use our public instance or self host with Heroku or Docker.
 
 ## Examples
 
@@ -72,29 +72,3 @@ fetch('/latest?from=GBP&to=USD')
 ```
 
 Cache data whenever possible.
-
-## Deployment
-
-To build locally, type
-
-```bash
-docker-compose up -d
-```
-
-Now you can access the API at `http://localhost:8080`.
-
-In production, create a [`.env`](.env.example) file and run with
-
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-```
-
-To update to a newer image, run
-
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml pull
-```
-
-Within a few minutes, you will access the API at `https://yourdomain.com/`.
-
-[![Travis](https://travis-ci.org/hakanensari/frankfurter.svg)](https://travis-ci.org/hakanensari/frankfurter)

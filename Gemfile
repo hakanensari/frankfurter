@@ -29,7 +29,7 @@ group :test do
   gem 'minitest'
   gem 'minitest-around'
   gem 'rack-test'
-  gem 'rubocop'
+  gem 'rubocop-sequel'
   gem 'vcr'
   gem 'webmock'
 end

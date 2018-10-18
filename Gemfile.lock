@@ -60,6 +60,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
+    rubocop-sequel (0.0.6)
+      rubocop (~> 0.55, >= 0.55)
     ruby-progressbar (1.10.0)
     rufus-scheduler (3.5.2)
       fugit (~> 1.1, >= 1.1.5)
@@ -110,7 +112,7 @@ DEPENDENCIES
   rack-test
   rake
   redcarpet
-  rubocop
+  rubocop-sequel
   rufus-scheduler
   sass
   sequel_pg
@@ -125,4 +127,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.4
+   1.16.6
