@@ -20,6 +20,7 @@ before_install:
   - sudo service postgresql restart
   - sleep 1
   - psql -c 'create database frankfurter_test;' -U postgres
+  - gem install bundler
 
 bundler_args: --without development
 env:
