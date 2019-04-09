@@ -2,7 +2,7 @@ require:
   - rubocop-sequel
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.6
 
 Documentation:
   Enabled: false
@@ -11,7 +11,7 @@ Metrics/BlockLength:
   ExcludedMethods: ['dataset_module', 'describe', 'helpers']
 
 Metrics/AbcSize:
-  Max: 20.45
+  Max: 20.62
 
 Metrics/MethodLength:
   Max: 13
