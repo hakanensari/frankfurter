@@ -2,8 +2,6 @@
 
 require 'oj'
 require 'rack/cors'
-require 'redcarpet'
-require 'sass/plugin/rack'
 require 'sinatra'
 
 require 'currency_names'
@@ -16,11 +14,6 @@ use Rack::Cors do
     resource '*', headers: :any, methods: :get
   end
 end
-
-css_location = File.join(Sinatra::Application.public_folder, 'stylesheets')
-Sass::Plugin.options.update css_location: css_location,
-                            style: :compressed
-use Sass::Plugin::Rack
 
 configure :development do
   set :show_exceptions, :after_handler
@@ -76,13 +69,7 @@ helpers do
 end
 
 get '/' do
-  # FIXME: We should cache this in production.
-  parser = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
-                                   disable_indented_code_blocks: true,
-                                   fenced_code_blocks: true)
-  content = parser.render(File.read('README.md'))
-
-  erb :index, locals: { content: content }
+  redirect 'https://www.frankfurter.app', 301
 end
 
 get '/(?:latest|current)', mustermann_opts: { type: :regexp } do

@@ -11,9 +11,9 @@ describe 'the server' do
   let(:json) { Oj.load(last_response.body) }
   let(:headers) { last_response.headers }
 
-  it 'has a homepage' do
+  it 'redirects to www' do
     get '/'
-    last_response.must_be :ok?
+    last_response.must_be :redirect?
   end
 
   it 'returns latest quotes' do

@@ -4,14 +4,12 @@ GEM
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     ast (2.4.0)
-    builder (3.2.3)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     et-orbi (1.2.0)
       tzinfo
-    ffi (1.10.0)
     fugit (1.2.0)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.1)
@@ -48,10 +46,6 @@ GEM
     rainbow (3.0.0)
     raindrops (0.19.0)
     rake (12.3.2)
-    rb-fsevent (0.10.3)
-    rb-inotify (0.10.0)
-      ffi (~> 1.0)
-    redcarpet (3.4.0)
     rubocop (0.67.2)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -66,11 +60,6 @@ GEM
     rufus-scheduler (3.6.0)
       fugit (~> 1.1, >= 1.1.6)
     safe_yaml (1.0.5)
-    sass (3.7.4)
-      sass-listen (~> 4.0.0)
-    sass-listen (4.0.0)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
     sequel (5.19.0)
     sequel_pg (1.12.0)
       pg (>= 0.18.0)
@@ -82,8 +71,6 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.5)
       tilt (~> 2.0)
-    sitemap_generator (6.0.2)
-      builder (~> 3.0)
     tilt (2.0.9)
     tzinfo (2.0.0)
       concurrent-ruby (~> 1.0)
@@ -110,14 +97,11 @@ DEPENDENCIES
   rack-cors
   rack-test
   rake
-  redcarpet
   rubocop-sequel
   rufus-scheduler
-  sass
   sequel_pg
   shotgun
   sinatra
-  sitemap_generator
   unicorn
   vcr
   webmock
