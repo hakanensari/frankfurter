@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+`rake db:setup`
+
 worker_process_count = (ENV['WORKER_PROCESSES'] || 4).to_i
 
 preload_app true
