@@ -66,7 +66,7 @@ module Quote
       result.each do |date, rates|
         rates['EUR'] = amount if symbols.nil? || symbols.include?('EUR')
         divisor = rates.delete(base)
-        if rates.empty?
+        if divisor.nil? || rates.empty?
           result.delete(date)
         else
           result[date] = rates.sort

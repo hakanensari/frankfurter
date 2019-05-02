@@ -50,6 +50,27 @@ module Quote
       end
     end
 
+    describe 'when rebasing from an unavailable currency' do
+      let(:date) do
+        Date.parse('2000-01-01')
+      end
+
+      let(:quote) do
+        klass.new(date: date, base: 'ILS')
+      end
+
+      before do
+        def quote.fetch_data
+          [{ date: date, iso_code: 'USD', rate: 1 }]
+        end
+      end
+
+      it 'finds nothing' do
+        quote.perform
+        quote.not_found?.must_equal true
+      end
+    end
+
     describe 'when rebasing and converting to an unavailable currency' do
       let(:date) do
         Date.today
@@ -61,7 +82,7 @@ module Quote
 
       before do
         def quote.fetch_data
-          [{ date: date, iso_code: 'USD', rate: 1.2 }]
+          [{ date: date, iso_code: 'USD', rate: 1 }]
         end
       end
 

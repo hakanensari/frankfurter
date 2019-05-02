@@ -28,14 +28,14 @@ describe 'the server' do
     last_response.must_be :not_found?
   end
 
-  it 'will not process an invalid base' do
+  it 'will not process an unavailable base' do
     get '/latest?base=UAH'
-    last_response.must_be :unprocessable?
+    last_response.must_be :not_found?
   end
 
   it 'handles malformed queries' do
     get '/latest?base=USD?callback=?'
-    last_response.must_be :unprocessable?
+    last_response.must_be :not_found?
   end
 
   it 'does not return stale dates' do
