@@ -22,6 +22,8 @@ GEM
     minitest (5.11.3)
     minitest-around (0.5.0)
       minitest (~> 5.0)
+    minitest-focus (1.1.2)
+      minitest (>= 4, < 6)
     money (6.13.3)
       i18n (>= 0.6.4, <= 2)
     mustermann (1.0.3)
@@ -54,6 +56,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.6)
+    rubocop-performance (1.1.0)
+      rubocop (>= 0.67.0)
     rubocop-sequel (0.0.6)
       rubocop (~> 0.55, >= 0.55)
     ruby-progressbar (1.10.0)
@@ -90,6 +94,7 @@ PLATFORMS
 DEPENDENCIES
   minitest
   minitest-around
+  minitest-focus
   money
   oj
   ox
@@ -97,6 +102,7 @@ DEPENDENCIES
   rack-cors
   rack-test
   rake
+  rubocop-performance
   rubocop-sequel
   rufus-scheduler
   sequel_pg

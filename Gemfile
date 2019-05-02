@@ -25,7 +25,9 @@ end
 group :test do
   gem 'minitest'
   gem 'minitest-around'
+  gem 'minitest-focus'
   gem 'rack-test'
+  gem 'rubocop-performance'
   gem 'rubocop-sequel'
   gem 'vcr'
   gem 'webmock'

@@ -1,4 +1,5 @@
 require:
+  - rubocop-performance
   - rubocop-sequel
 
 AllCops:
