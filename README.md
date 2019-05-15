@@ -1,74 +1,41 @@
 # Frankfurter
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/hakanensari/frankfurter)
+[![Build](https://travis-ci.org/hakanensari/frankfurter.svg?branch=master)](https://travis-ci.org/hakanensari/frankfurter.svg?branch=master)
 
-Frankfurter is a free and open source API for current and historical foreign exchange rates. It tracks data published by the European Central Bank. Rates update around 4PM CET every working day.
+[Frankfurter](https://www.frankfurter.app) is a free, open-source currency data API that tracks reference exchange rates published by the European Central Bank.
 
-Use our public instance or self host with Heroku or Docker.
+Frankfurter was known as Fixer until March 2018, when I sold the domain. After the buyer abandoned the underlying open-source project, I relaunched under this name.
 
-## Examples
+## Getting Started
 
-Get the current foreign exchange rates.
+Get the latest exchange rates.
 
 ```http
 GET /latest HTTP/1.1
 ```
 
-Get historical rates for any day since 1999.
+Get rates for a past date.
 
 ```http
 GET /2000-01-03 HTTP/1.1
 ```
 
-Get historical rates for a time period.
+Get rates for a period.
 
 ```http
 GET /2010-01-01..2010-01-31 HTTP/1.1
 ```
 
-Get historical rates for a time period up to the present.
+For further examples, read the [docs](https://www.frankfurter.app/docs#usage).
 
-```http
-GET /2010-01-01.. HTTP/1.1
+## Deployment
+
+You can self-host Frankfurter easily with Docker.
+
+```bash
+docker run -d -p 8080:8080 \
+  -e "DATABASE_URL=<postgres_url>" \
+  --name frankfurter hakanensari/frankfurter
 ```
 
-Get a list of available currency symbols, along with their full names.
-
-```http
-GET /currencies HTTP/1.1
-```
-
-Rates quote against the Euro by default. Quote against a different currency.
-
-```http
-GET /latest?from=USD HTTP/1.1
-```
-
-Request specific exchange rates.
-
-```http
-GET /latest?to=USD,GBP HTTP/1.1
-```
-
-Convert a specific amount.
-
-```http
-GET /latest?amount=1000&from=GBP&to=USD HTTP/1.1
-```
-
-With a full list of currencies, time series grow large in size. For better performance, use the to parameter to reduce the response weight.
-
-```http
-GET /2016-01-01..2016-12-31?from=GBP&to=USD HTTP/1.1
-```
-
-Here we return the current GBP/USD currency pair with JavaScript.
-
-```js
-// Fetch and display GBP/USD
-fetch('/latest?from=GBP&to=USD')
-  .then(resp => resp.json())
-  .then((data) => { alert(`GBPUSD = ${data.rates.USD}`); });
-```
-
-Cache data whenever possible.
+Check out the [website](https://www.frankfurter.app/docs#deployment) for a more detailed walkthrough.
