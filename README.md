@@ -1,6 +1,8 @@
 # Frankfurter
 
-[![Build](https://travis-ci.org/hakanensari/frankfurter.svg?branch=master)](https://travis-ci.org/hakanensari/frankfurter.svg?branch=master)
+[![Build](https://github.com/hakanensari/frankfurter/workflows/build/badge.svg)](https://github.com/hakanensari/frankfurter/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/81f8a458f29f171928f7/maintainability)](https://codeclimate.com/github/hakanensari/frankfurter/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/81f8a458f29f171928f7/test_coverage)](https://codeclimate.com/github/hakanensari/frankfurter/test_coverage)
 
 [Frankfurter](https://www.frankfurter.app) is a free, open-source currency data API that tracks reference exchange rates published by the European Central Bank.
 
