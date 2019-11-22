@@ -11,13 +11,13 @@ module Roundable
     if value > 5000
       value.round
     elsif value > 80
-      Float(format('%.2f', value))
+      Float(format('%<value>.2f', value: value))
     elsif value > 20
-      Float(format('%.3f', value))
+      Float(format('%<value>.3f', value: value))
     elsif value > 1
-      Float(format('%.4f', value))
+      Float(format('%<value>.4f', value: value))
     else
-      Float(format('%.5f', value))
+      Float(format('%<value>.5f', value: value))
     end
   end
 end

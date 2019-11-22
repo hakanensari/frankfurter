@@ -1,0 +1,8 @@
+Metrics/AbcSize:
+  Max: 21.79
+Metrics/BlockLength:
+  ExcludedMethods: ['dataset_module', 'describe', 'helpers']
+Metrics/MethodLength:
+  Max: 13
+Style/Documentation:
+  Enabled: false
