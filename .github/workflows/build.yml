@@ -42,7 +42,7 @@ jobs:
 
     - name: Publish image
       uses: elgohr/Publish-Docker-Github-Action@master
-      if: github.event_name == 'push' && github.ref == 'master'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master' && success()
       with:
         name: hakanensari/frankfurter
         username: ${{ secrets.DOCKER_USERNAME }}
