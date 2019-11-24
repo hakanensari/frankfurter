@@ -4,12 +4,6 @@ on: [push, pull_request]
 
 jobs:
   build:
-    env:
-      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      DATABASE_URL: postgres://postgres@localhost/postgres
-      GIT_COMMIT_SHA: ${{ github.sha }}
-      GIT_BRANCH: ${{ github.ref }}
-
     runs-on: ubuntu-latest
 
     services:
@@ -39,6 +33,8 @@ jobs:
         gem install bundler
         bundle install --jobs 4 --retry 3
         bundle exec rake
+      env:
+        DATABASE_URL: postgres://postgres@localhost/postgres
 
     - name: Publish image
       uses: elgohr/Publish-Docker-Github-Action@master
@@ -50,6 +46,7 @@ jobs:
 
     - name: Report to Code Climate
       continue-on-error: true
-      if: success()
-      run: ./cc-test-reporter after-build --exit-code $?
-
+      run: GIT_BRANCH="${GITHUB_REF/refs\/heads\//}" ./cc-test-reporter after-build --exit-code $?
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        GIT_COMMIT_SHA: ${{ github.sha }}
