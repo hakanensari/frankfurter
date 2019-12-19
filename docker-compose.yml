@@ -1,66 +1,17 @@
 version: '3'
-
 services:
   db:
     image: postgres
-    restart: unless-stopped
     volumes:
       - data:/var/lib/postgresql/data
-
   web:
     command: unicorn -c config/unicorn.rb
     entrypoint: bin/wait-for-it.sh db:5432 -s --
-    env_file: .env
     environment:
       DATABASE_URL: postgres://postgres@db/postgres
     expose:
       - '8080'
-    image: hakanensari/frankfurter
     links:
       - db
-    logging:
-      options:
-        max-size: "50m"
-        max-file: "10"
-    restart: unless-stopped
-
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    labels:
-      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
-    logging:
-      options:
-        max-size: "50m"
-        max-file: "10"
-    ports:
-      - "80:80"
-      - "443:443"
-    restart: unless-stopped
-    volumes:
-      - /etc/nginx/conf.d
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./limit_req.conf:/etc/nginx/conf.d/limit_req.conf:ro
-      - certs:/etc/nginx/certs:ro
-      - html:/usr/share/nginx/html
-      - vhost.d:/etc/nginx/vhost.d
-
-  letsencrypt-nginx-proxy-companion:
-    depends_on:
-      - nginx-proxy
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    logging:
-      options:
-        max-size: "50m"
-        max-file: "10"
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - certs:/etc/nginx/certs:rw
-      - html:/usr/share/nginx/html
-      - vhost.d:/etc/nginx/vhost.d
-
 volumes:
-  certs:
   data:
-  html:
-  vhost.d:

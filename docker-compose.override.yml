@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    build: .
+    environment:
+      APP_ENV: development
+      VIRTUAL_HOST: localhost
+    ports:
+      - "8080:8080"
