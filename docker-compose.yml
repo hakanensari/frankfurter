@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: postgres
+    image: postgres:11
     volumes:
       - data:/var/lib/postgresql/data
   web:
