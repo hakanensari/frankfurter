@@ -19,7 +19,7 @@ require 'webmock'
 
 begin
   require 'pry'
-rescue LoadError # rubocop:disable Lint/HandleExceptions
+rescue LoadError # rubocop:disable Lint/SuppressedException
 end
 
 VCR.configure do |c|
