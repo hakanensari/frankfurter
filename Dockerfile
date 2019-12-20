@@ -8,4 +8,4 @@ RUN gem install bundler
 RUN bundle config set without "development test"
 RUN bundle install --jobs=8
 ADD . /app
-CMD ["unicorn", "-c", "./config/unicorn.rb"]
+CMD ["bundle", "exec", "unicorn", "-c", "./config/unicorn.rb"]
