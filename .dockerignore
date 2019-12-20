@@ -1,5 +1,8 @@
 .*
+docker-compose*
 Dockerfile
 LICENSE
+Procfile
 spec
+*.md
 *.yml

@@ -1,7 +1,4 @@
-*.css*
 .bundle
 .env
-.sass-cache
 coverage
 pkg
-
