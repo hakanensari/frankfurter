@@ -4,9 +4,9 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/81f8a458f29f171928f7/maintainability)](https://codeclimate.com/github/hakanensari/frankfurter/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/81f8a458f29f171928f7/test_coverage)](https://codeclimate.com/github/hakanensari/frankfurter/test_coverage)
 
-[Frankfurter](https://www.frankfurter.app) is a free, open-source currency data API that tracks reference exchange rates published by the European Central Bank.
+[Frankfurter](https://www.frankfurter.app) is a free and open-source currency data API that tracks reference exchange rates published by the European Central Bank.
 
-Frankfurter was known as Fixer until March 2018, when I sold the domain. After the buyer abandoned the underlying open-source project, I relaunched under this name.
+I host a public instance of the API at `api.frankfurter.app`.
 
 ## Getting Started
 
@@ -28,11 +28,13 @@ Get rates for a period.
 GET /2010-01-01..2010-01-31 HTTP/1.1
 ```
 
-For further examples, read the [docs](https://www.frankfurter.app/docs#usage).
+For more examples, read the [docs](https://www.frankfurter.app/docs).
 
 ## Deployment
 
-You can self-host Frankfurter easily with Docker.
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/hakanensari/frankfurter)
+
+You can self-host Frankfurter with Heroku or Docker.
 
 ```bash
 docker run -d -p 8080:8080 \
@@ -41,3 +43,7 @@ docker run -d -p 8080:8080 \
 ```
 
 Check out the [website](https://www.frankfurter.app/docs#deployment) for a more detailed walkthrough.
+
+## Miscellaneous
+
+Frankfurter was known as Fixer between 2012 and 2018. After selling the original domain, I relaunched under this name.
