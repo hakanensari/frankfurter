@@ -6,20 +6,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    container:
+      image: ruby:2.6.5
+
     services:
       postgres:
         image: postgres:12
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         ports:
           - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
     - uses: actions/checkout@v1
-
-    - name: Set up Ruby
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: 2.6.3
 
     - name: Set up reporter
       run: |
@@ -27,14 +25,17 @@ jobs:
         chmod +x ./cc-test-reporter
         ./cc-test-reporter before-build
 
-    - name: Run tests
+    - name: Install dependencies
       run: |
-        sudo apt-get install libpq-dev
+        apt-get -yqq install libpq-dev
         gem install bundler
         bundle install --jobs 4 --retry 3
-        bundle exec rake
+
+    - name: Run tests
+      run: bundle exec rake
       env:
-        DATABASE_URL: postgres://postgres@localhost/postgres
+        APP_ENV: test
+        DATABASE_URL: postgres://postgres@postgres/postgres
 
     - name: Publish image
       uses: elgohr/Publish-Docker-Github-Action@master
