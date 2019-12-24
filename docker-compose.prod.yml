@@ -11,6 +11,7 @@ services:
         max-file: "10"
     restart: unless-stopped
   nginx-proxy:
+    container_name: nginx-proxy
     image: jwilder/nginx-proxy
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
@@ -30,6 +31,7 @@ services:
       - html:/usr/share/nginx/html
       - vhost.d:/etc/nginx/vhost.d
   letsencrypt-nginx-proxy-companion:
+    container_name: nginx-proxy-le
     image: jrcs/letsencrypt-nginx-proxy-companion
     depends_on:
       - nginx-proxy

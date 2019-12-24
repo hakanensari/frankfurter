@@ -1,10 +1,12 @@
 version: '3'
 services:
   db:
+    container_name: db
     image: postgres:11
     volumes:
       - data:/var/lib/postgresql/data
   web:
+    container_name: app
     command: bundle exec unicorn -c config/unicorn.rb
     entrypoint: bin/wait-for-it.sh db:5432 -s --
     environment:
