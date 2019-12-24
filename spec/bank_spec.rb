@@ -6,6 +6,7 @@ require 'bank'
 describe Bank do
   around do |test|
     Day.db.transaction do
+      Day.dataset.delete
       test.call
       raise Sequel::Rollback
     end
@@ -20,39 +21,42 @@ describe Bank do
   end
 
   it 'fetches all rates' do
-    Day.dataset.delete
     Bank.fetch_all!
-    Day.count.must_be :positive?
+    Day.count.must_be :>, 90
   end
 
-  it 'skips existing records when fetching all rates' do
-    Day.where { date < '2012-01-01' }.delete
+  it 'does not duplicate when fetching all rates' do
     Bank.fetch_all!
-    Day.where { date < '2012-01-01' }.count.must_be :positive?
+    count = Day.count
+    Bank.fetch_all!
+    Day.count.must_equal count
   end
 
   it 'fetches rates for last 90 days' do
-    Day.dataset.delete
     Bank.fetch_ninety_days!
-    Day.count.must_be :positive?
+    Day.count.must_be :>, 1
+    Day.count.must_be :<, 90
   end
 
-  it 'skips existing records when fetching rates for last 90 days' do
-    cutoff = Date.today - 60
-    Day.where { date < cutoff }.delete
+  it 'does not duplicate when fetching rates for last 90 days' do
     Bank.fetch_ninety_days!
-    Day.where { date < cutoff }.count.must_be :positive?
+    count = Day.count
+    Bank.fetch_ninety_days!
+    Day.count.must_equal count
   end
 
   it 'fetches current rates' do
-    Day.dataset.delete
     Bank.fetch_current!
-    Day.count.must_be :positive?
+    Day.count.must_equal 1
+  end
+
+  it 'does not duplicate when fetching current rates' do
+    2.times { Bank.fetch_current! }
+    Day.count.must_equal 1
   end
 
   it 'replaces all rates' do
-    Day.dataset.delete
-    Bank.fetch_all!
-    Day.count.must_be :positive?
+    Bank.replace_all!
+    Day.count.must_be :>, 90
   end
 end

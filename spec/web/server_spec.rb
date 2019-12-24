@@ -11,7 +11,7 @@ describe 'the server' do
   let(:json) { Oj.load(last_response.body) }
   let(:headers) { last_response.headers }
 
-  it 'redirects to www' do
+  it 'redirects root to documentation site' do
     get '/'
     last_response.must_be :redirect?
   end
@@ -96,5 +96,10 @@ describe 'the server' do
   it 'returns currencies' do
     get '/currencies'
     json['USD'].must_equal 'United States Dollar'
+  end
+
+  it 'handles JSONP' do
+    get '/latest?callback=foo'
+    last_response.body.must_be :start_with?, 'foo'
   end
 end
