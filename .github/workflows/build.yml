@@ -38,12 +38,13 @@ jobs:
         DATABASE_URL: postgres://postgres@postgres/postgres
 
     - name: Publish image
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master' && success()
       uses: elgohr/Publish-Docker-Github-Action@a72734e
+      if: github.event_name == 'push' && success()
       with:
         name: hakanensari/frankfurter
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        tag_names: true
 
     - name: Report to Code Climate
       continue-on-error: true
