@@ -38,8 +38,8 @@ jobs:
         DATABASE_URL: postgres://postgres@postgres/postgres
 
     - name: Publish image
-      uses: elgohr/Publish-Docker-Github-Action@master
       if: github.event_name == 'push' && github.ref == 'refs/heads/master' && success()
+      uses: elgohr/Publish-Docker-Github-Action@a72734e
       with:
         name: hakanensari/frankfurter
         username: ${{ secrets.DOCKER_USERNAME }}
