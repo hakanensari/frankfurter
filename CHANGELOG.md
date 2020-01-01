@@ -8,4 +8,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Start versioning images so users can track changes
 
-[Unreleased]: https://github.com/hakanensari/peddler/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/hakanensari/frankfurter/compare/v1.0.0...HEAD
