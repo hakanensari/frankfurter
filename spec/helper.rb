@@ -17,11 +17,6 @@ require 'minitest/focus'
 require 'vcr'
 require 'webmock'
 
-begin
-  require 'pry'
-rescue LoadError # rubocop:disable Lint/SuppressedException
-end
-
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.hook_into :webmock

@@ -14,10 +14,6 @@ gem 'sequel_pg'
 gem 'sinatra'
 gem 'unicorn'
 
-group :development, :test do
-  gem 'pry'
-end
-
 group :test do
   gem 'minitest'
   gem 'minitest-around'
