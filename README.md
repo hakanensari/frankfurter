@@ -1,6 +1,6 @@
 # Frankfurter
 
-[![Build](https://github.com/hakanensari/frankfurter/workflows/build/badge.svg)](https://github.com/hakanensari/frankfurter/actions)
+[![Build](https://github.com/hakanensari/frankfurter/workflows/ci/badge.svg)](https://github.com/hakanensari/frankfurter/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/81f8a458f29f171928f7/maintainability)](https://codeclimate.com/github/hakanensari/frankfurter/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/81f8a458f29f171928f7/test_coverage)](https://codeclimate.com/github/hakanensari/frankfurter/test_coverage)
 
