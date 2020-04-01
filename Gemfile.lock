@@ -63,7 +63,7 @@ GEM
     rufus-scheduler (3.6.0)
       fugit (~> 1.1, >= 1.1.6)
     safe_yaml (1.0.5)
-    sequel (5.30.0)
+    sequel (5.31.0)
     sequel_pg (1.12.5)
       pg (>= 0.18.0, != 1.2.0)
       sequel (>= 4.38.0)
@@ -113,7 +113,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.7.0p0
+   ruby 2.7.1p83
 
 BUNDLED WITH
-   2.1.2
+   2.1.4
