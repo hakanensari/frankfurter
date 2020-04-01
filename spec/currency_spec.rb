@@ -21,14 +21,9 @@ describe Currency do
       Currency.between(interval).map(:date).uniq.count.must_be :>, 30
     end
 
-    it 'samples weekly over 90 but below 366 days' do
+    it 'samples weekly over 90 days' do
       interval = day..day + 365
       Currency.between(interval).map(:date).uniq.count.must_be :<=, 52
-    end
-
-    it 'samples monthly over 365 days' do
-      interval = day..day + 400
-      Currency.between(interval).map(:date).uniq.count.must_be :<=, 120
     end
 
     it 'sorts by date' do

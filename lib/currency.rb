@@ -18,8 +18,7 @@ class Currency < Sequel::Model(Day.currencies)
     def between(interval)
       case interval.last - interval.first
       when 0..90 then super
-      when 91..365 then super.sample('week')
-      else super.sample('month')
+      when 91.. then super.sample('week')
       end
     end
 

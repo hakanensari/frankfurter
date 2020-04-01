@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Sample weekly when querying over 365 days
 
 ## 1.0.0 - 2020-01-02
 ### Fixed
