@@ -1,3 +1,7 @@
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
 Metrics/AbcSize:
   Max: 21.79
 Metrics/BlockLength:
@@ -6,3 +10,9 @@ Metrics/MethodLength:
   Max: 13
 Style/Documentation:
   Enabled: false
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
