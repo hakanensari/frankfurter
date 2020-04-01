@@ -2,9 +2,9 @@ version: '3'
 services:
   db:
     container_name: db
-    image: postgres:11
-    volumes:
-      - data:/var/lib/postgresql/data
+    image: postgres:12
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
   web:
     container_name: app
     command: bundle exec unicorn -c config/unicorn.rb
