@@ -17,7 +17,6 @@ GEM
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.4)
-    json (2.3.0)
     kgio (2.11.3)
     minitest (5.14.0)
     minitest-around (0.5.0)
@@ -68,11 +67,10 @@ GEM
     sequel_pg (1.12.5)
       pg (>= 0.18.0, != 1.2.0)
       sequel (>= 4.38.0)
-    simplecov (0.17.1)
+    simplecov (0.18.5)
       docile (~> 1.1)
-      json (>= 1.8, < 3)
-      simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.2)
+      simplecov-html (~> 0.11)
+    simplecov-html (0.12.2)
     sinatra (2.0.8.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -108,7 +106,7 @@ DEPENDENCIES
   rubocop-sequel
   rufus-scheduler
   sequel_pg
-  simplecov (= 0.17.1)
+  simplecov
   sinatra
   unicorn
   vcr

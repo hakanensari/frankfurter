@@ -21,7 +21,7 @@ group :test do
   gem 'rack-test'
   gem 'rubocop-performance'
   gem 'rubocop-sequel'
-  gem 'simplecov', '0.17.1'
+  gem 'simplecov'
   gem 'vcr'
   gem 'webmock'
 end
