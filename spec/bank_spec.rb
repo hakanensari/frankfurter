@@ -38,6 +38,11 @@ describe Bank do
     Day.count.must_be :<, 90
   end
 
+  it 'seeds rates with saved data' do
+    Bank.seed_with_saved_data!
+    Day.count.must_be :>, 90
+  end
+
   it 'does not duplicate when fetching rates for last 90 days' do
     Bank.fetch_ninety_days!
     count = Day.count
