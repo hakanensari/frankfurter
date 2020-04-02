@@ -30,6 +30,13 @@ module Bank
       Day.multi_insert(data)
     end
 
+    def seed_with_saved_data!
+      data = Feed.saved_data.to_a
+      jsonify!(data)
+      Day.dataset.delete
+      Day.multi_insert(data)
+    end
+
     private
 
     def jsonify!(data)

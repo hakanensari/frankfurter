@@ -18,4 +18,9 @@ namespace :rates do
     require 'bank'
     Bank.fetch_current!
   end
+
+  task :seed_with_saved_data do
+    require 'bank'
+    Bank.seed_with_saved_data!
+  end
 end

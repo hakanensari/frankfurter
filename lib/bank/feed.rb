@@ -8,42 +8,42 @@ module Bank
     include Enumerable
 
     def self.current
-      new('daily')
+      url = URI('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml')
+      xml = Net::HTTP.get(url)
+
+      new(xml)
     end
 
     def self.ninety_days
-      new('hist-90d')
+      url = URI('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml')
+      xml = Net::HTTP.get(url)
+
+      new(xml)
     end
 
     def self.historical
-      new('hist')
+      url = URI('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml')
+      xml = Net::HTTP.get(url)
+
+      new(xml)
     end
 
-    def initialize(scope)
-      @scope = scope
+    def self.saved_data
+      xml = File.read(File.join(__dir__, 'eurofxref-hist.xml'))
+      new(xml)
+    end
+
+    def initialize(xml)
+      @document = Ox.load(xml)
     end
 
     def each
-      document.locate('gesmes:Envelope/Cube/Cube').each do |day|
+      @document.locate('gesmes:Envelope/Cube/Cube').each do |day|
         yield(date: Date.parse(day['time']),
               rates: day.nodes.each_with_object({}) do |currency, rates|
                 rates[currency[:currency]] = Float(currency[:rate])
               end)
       end
-    end
-
-    private
-
-    def document
-      Ox.load(xml)
-    end
-
-    def xml
-      Net::HTTP.get(url)
-    end
-
-    def url
-      URI("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-#{@scope}.xml")
     end
   end
 end

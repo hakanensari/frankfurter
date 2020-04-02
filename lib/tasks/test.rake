@@ -15,4 +15,4 @@ end
 
 RuboCop::RakeTask.new
 
-task default: %w[db:setup test rubocop]
+task default: %w[db:test:prepare test rubocop]

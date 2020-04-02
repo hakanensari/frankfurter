@@ -5,7 +5,7 @@ require 'rufus-scheduler'
 
 scheduler = Rufus::Scheduler.new
 
-scheduler.cron '*/15 15,16,17 * * 1-5' do
+scheduler.cron '*/30 15,16,17 * * 1-5' do
   `rake rates:current`
 end
 
