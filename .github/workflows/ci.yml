@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v2
     - run: gem install bundler
     - run: bundle install --jobs 4 --retry 3
-    - uses: paambaati/codeclimate-action@v2.4.0
+    - uses: paambaati/codeclimate-action@v2.5.6
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         DATABASE_URL: postgres://postgres@postgres/postgres
