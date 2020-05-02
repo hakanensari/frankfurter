@@ -56,7 +56,7 @@ helpers do
 
   def json(data)
     json = Oj.dump(data, mode: :compat)
-    callback = params.delete('callback')
+    callback = params['callback']
 
     if callback
       content_type :js

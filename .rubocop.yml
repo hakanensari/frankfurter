@@ -1,8 +1,9 @@
 inherit_from: ".rubocop_todo.yml"
 
 require:
+  - rubocop-minitest
   - rubocop-performance
   - rubocop-sequel
 
 AllCops:
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 2.7

@@ -1,15 +1,21 @@
-Lint/RaiseException:
-  Enabled: true
-Lint/StructNewOverride:
-  Enabled: true
 Metrics/AbcSize:
   Max: 21.79
 Metrics/BlockLength:
-  ExcludedMethods: ['dataset_module', 'describe', 'helpers']
+  ExcludedMethods: ['describe', 'helpers']
 Metrics/MethodLength:
   Max: 13
 Style/Documentation:
   Enabled: false
+
+# New cops
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
 Style/HashEachMethods:
   Enabled: true
 Style/HashTransformKeys:
