@@ -17,7 +17,6 @@ class Day < Sequel::Model
              Sequel.lit('rates.key').as(:iso_code),
              Sequel.lit('rates.value::text::float').as(:rate))
         .join(Sequel.function(:jsonb_each, :rates).lateral.as(:rates), true)
-        .order(Sequel.asc(:date), Sequel.asc(:iso_code))
     end
   end
 end
