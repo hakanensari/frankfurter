@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Changed
-- Sample weekly when querying over 365 days
+- Sample weekly when querying over a year
 - Bump PostgreSQL to 12
 
 ## 1.0.0 - 2020-01-02

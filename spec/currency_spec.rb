@@ -16,14 +16,14 @@ describe Currency do
       Date.parse('2010-01-01')
     end
 
-    it 'returns everything up to 90 days' do
-      interval = day..day + 90
-      Currency.between(interval).map(:date).uniq.count.must_be :>, 30
+    it 'returns everything up to a year' do
+      interval = day..day + 365
+      Currency.between(interval).map(:date).uniq.count.must_be :>, 52
     end
 
-    it 'samples weekly over 90 days' do
-      interval = day..day + 365
-      Currency.between(interval).map(:date).uniq.count.must_be :<=, 52
+    it 'samples weekly over a year' do
+      interval = day..day + 366
+      Currency.between(interval).map(:date).uniq.count.must_be :<, 54
     end
 
     it 'sorts by date' do
