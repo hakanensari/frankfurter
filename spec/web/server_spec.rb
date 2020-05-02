@@ -11,9 +11,9 @@ describe 'the server' do
   let(:json) { Oj.load(last_response.body) }
   let(:headers) { last_response.headers }
 
-  it 'redirects root to documentation site' do
+  it 'returns link to docs' do
     get '/'
-    _(last_response).must_be :redirect?
+    _(json['docs']).wont_be_nil
   end
 
   it 'returns latest quotes' do
@@ -101,5 +101,10 @@ describe 'the server' do
   it 'handles JSONP' do
     get '/latest?callback=foo'
     _(last_response.body).must_be :start_with?, 'foo'
+  end
+
+  it 'sets charset to UTF-8' do
+    get '/currencies'
+    _(last_response.headers['content-type']).must_be :end_with?, 'charset=UTF-8'
   end
 end

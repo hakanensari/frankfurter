@@ -57,17 +57,17 @@ helpers do
     callback = params['callback']
 
     if callback
-      content_type :js
+      content_type :js, charset: Encoding::UTF_8
       "#{callback}(#{json})"
     else
-      content_type :json
+      content_type :json, charset: Encoding::UTF_8
       json
     end
   end
 end
 
 get '/' do
-  redirect 'https://www.frankfurter.app', 301
+  json({ docs: 'https://wwww.frankfurter.app/docs' })
 end
 
 get '/(?:latest|current)', mustermann_opts: { type: :regexp } do
