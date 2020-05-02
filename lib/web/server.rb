@@ -33,7 +33,7 @@ helpers do
   def end_of_day_quote
     @end_of_day_quote ||= begin
       query = Query.build(params)
-      quote = Quote::EndOfDay.new(query)
+      quote = Quote::EndOfDay.new(**query)
       quote.perform
       halt 404 if quote.not_found?
 
@@ -44,7 +44,7 @@ helpers do
   def interval_quote
     @interval_quote ||= begin
       query = Query.build(params)
-      quote = Quote::Interval.new(query)
+      quote = Quote::Interval.new(**query)
       quote.perform
       halt 404 if quote.not_found?
 
