@@ -27,8 +27,8 @@ describe Currency do
       _(Currency.between(interval).map(:date).uniq.count).must_be :<, 54
     end
 
-    it 'sorts by date' do
-      interval = day..day + 100
+    it 'sorts by date when sampling' do
+      interval = day..day + 366
       dates = Currency.between(interval).map(:date)
       _(dates).must_equal dates.sort
     end
