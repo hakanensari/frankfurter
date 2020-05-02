@@ -9,10 +9,10 @@ describe CurrencyNames do
   end
 
   it 'returns currency codes and names' do
-    currency_names.formatted['USD'].must_equal 'United States Dollar'
+    _(currency_names.formatted['USD']).must_equal 'United States Dollar'
   end
 
   it 'has a cache key' do
-    currency_names.cache_key.wont_be :empty?
+    _(currency_names.cache_key).wont_be :empty?
   end
 end

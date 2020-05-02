@@ -15,27 +15,27 @@ describe 'the server' do
 
   it 'handles unfound pages' do
     get '/foo'
-    last_response.status.must_equal 404
+    _(last_response.status).must_equal 404
   end
 
   it 'will not process an invalid date' do
     get '/2010-31-01'
-    last_response.must_be :unprocessable?
+    _(last_response).must_be :unprocessable?
   end
 
   it 'will not process a date before 2000' do
     get '/1999-01-01'
-    last_response.must_be :not_found?
+    _(last_response).must_be :not_found?
   end
 
   it 'will not process an unavailable base' do
     get '/latest?base=UAH'
-    last_response.must_be :not_found?
+    _(last_response).must_be :not_found?
   end
 
   it 'handles malformed queries' do
     get '/latest?base=USD?callback=?'
-    last_response.must_be :not_found?
+    _(last_response).must_be :not_found?
   end
 
   it 'does not return stale dates' do
@@ -44,7 +44,7 @@ describe 'the server' do
       date = json['date']
       Day.latest.delete
       get '/latest'
-      json['date'].wont_equal date
+      _(json['date']).wont_equal date
       raise Sequel::Rollback
     end
   end

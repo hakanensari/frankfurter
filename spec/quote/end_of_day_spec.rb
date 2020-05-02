@@ -18,24 +18,24 @@ module Quote
     end
 
     it 'returns rates' do
-      quote.formatted[:rates].wont_be :empty?
+      _(quote.formatted[:rates]).wont_be :empty?
     end
 
     it 'quotes given date' do
-      Date.parse(quote.formatted[:date]).must_be :<=, date
+      _(Date.parse(quote.formatted[:date])).must_be :<=, date
     end
 
     it 'quotes against the Euro' do
-      quote.formatted[:rates].keys.wont_include 'EUR'
+      _(quote.formatted[:rates].keys).wont_include 'EUR'
     end
 
     it 'sorts rates' do
       rates = quote.formatted[:rates]
-      rates.keys.must_equal rates.keys.sort
+      _(rates.keys).must_equal rates.keys.sort
     end
 
     it 'has a cache key' do
-      quote.cache_key.wont_be :empty?
+      _(quote.cache_key).wont_be :empty?
     end
 
     describe 'given a new base' do
@@ -44,12 +44,12 @@ module Quote
       end
 
       it 'quotes against that base' do
-        quote.formatted[:rates].keys.wont_include 'USD'
+        _(quote.formatted[:rates].keys).wont_include 'USD'
       end
 
       it 'sorts rates' do
         rates = quote.formatted[:rates]
-        rates.keys.must_equal rates.keys.sort
+        _(rates.keys).must_equal rates.keys.sort
       end
     end
 
@@ -60,13 +60,13 @@ module Quote
 
       it 'quotes only for those symbols' do
         rates = quote.formatted[:rates]
-        rates.keys.must_include 'USD'
-        rates.keys.wont_include 'CAD'
+        _(rates.keys).must_include 'USD'
+        _(rates.keys).wont_include 'CAD'
       end
 
       it 'sorts rates' do
         rates = quote.formatted[:rates]
-        rates.keys.must_equal rates.keys.sort
+        _(rates.keys).must_equal rates.keys.sort
       end
     end
 
@@ -76,7 +76,7 @@ module Quote
       end
 
       it 'calculates quotes for that amount' do
-        quote.formatted[:rates]['USD'].must_be :>, 10
+        _(quote.formatted[:rates]['USD']).must_be :>, 10
       end
     end
   end

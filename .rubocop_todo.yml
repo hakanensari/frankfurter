@@ -4,5 +4,8 @@ Metrics/BlockLength:
   ExcludedMethods: ['describe', 'helpers']
 Metrics/MethodLength:
   Max: 13
+Minitest:
+  Include:
+    - '**/*_spec.rb'
 Style/Documentation:
   Enabled: false

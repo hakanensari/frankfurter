@@ -14,23 +14,23 @@ module Quote
     end
 
     it 'requires data' do
-      -> { quote.perform }.must_raise NotImplementedError
+      _ { quote.perform }.must_raise NotImplementedError
     end
 
     it 'does not know how to format result' do
-      -> { quote.formatted }.must_raise NotImplementedError
+      _ { quote.formatted }.must_raise NotImplementedError
     end
 
     it 'does not know how to generate a cache key' do
-      -> { quote.cache_key }.must_raise NotImplementedError
+      _ { quote.cache_key }.must_raise NotImplementedError
     end
 
     it 'defaults base to Euro' do
-      quote.base.must_equal 'EUR'
+      _(quote.base).must_equal 'EUR'
     end
 
     it 'defaults amount to 1' do
-      quote.amount.must_equal 1
+      _(quote.amount).must_equal 1
     end
 
     describe 'when given data' do
@@ -67,7 +67,7 @@ module Quote
 
       it 'finds nothing' do
         quote.perform
-        quote.not_found?.must_equal true
+        _(quote.not_found?).must_equal true
       end
     end
 
@@ -88,7 +88,7 @@ module Quote
 
       it 'finds nothing' do
         quote.perform
-        quote.not_found?.must_equal true
+        _(quote.not_found?).must_equal true
       end
     end
   end
