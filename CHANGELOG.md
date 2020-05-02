@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Changed
+- Handle rounding edge case where a lower-rate base currency like IDR produces less precise quotes
 - Sample weekly when querying over a year
 - Bump PostgreSQL to 12
 
