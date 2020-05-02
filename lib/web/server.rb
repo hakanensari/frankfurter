@@ -32,6 +32,7 @@ set :static_cache_control, [:public, max_age: 300]
 helpers do
   def end_of_day_quote
     @end_of_day_quote ||= begin
+      query = Query.build(params)
       quote = Quote::EndOfDay.new(query)
       quote.perform
       halt 404 if quote.not_found?
@@ -42,16 +43,13 @@ helpers do
 
   def interval_quote
     @interval_quote ||= begin
+      query = Query.build(params)
       quote = Quote::Interval.new(query)
       quote.perform
       halt 404 if quote.not_found?
 
       quote
     end
-  end
-
-  def query
-    Query.new(params).to_h
   end
 
   def json(data)

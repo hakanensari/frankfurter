@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Query
+  def self.build(params)
+    new(params).to_h
+  end
+
   def initialize(params = {})
     @params = params
   end

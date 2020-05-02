@@ -4,6 +4,10 @@ require_relative 'helper'
 require 'query'
 
 describe Query do
+  it 'builds a query hash' do
+    Query.build(date: '2014-01-01').must_be_kind_of Hash
+  end
+
   it 'returns given amount' do
     query = Query.new(amount: '100')
     query.amount.must_equal 100.0
