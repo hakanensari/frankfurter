@@ -6,4 +6,5 @@ require:
   - rubocop-sequel
 
 AllCops:
+  NewCops: enable
   TargetRubyVersion: 2.7
