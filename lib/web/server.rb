@@ -67,7 +67,7 @@ helpers do
 end
 
 get '/' do
-  json({ docs: 'https://wwww.frankfurter.app/docs' })
+  json({ docs: 'https://www.frankfurter.app/docs' })
 end
 
 get '/(?:latest|current)', mustermann_opts: { type: :regexp } do
