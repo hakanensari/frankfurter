@@ -7,7 +7,7 @@ require 'web/server'
 describe 'the server' do
   include Rack::Test::Methods
 
-  let(:app) { Sinatra::Application }
+  let(:app) { Web::Server.freeze }
 
   def json
     Oj.load(last_response.body)

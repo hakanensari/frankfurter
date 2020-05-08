@@ -7,7 +7,7 @@ require 'web/server'
 describe 'the server' do
   include Rack::Test::Methods
 
-  let(:app)  { Sinatra::Application }
+  let(:app) { Web::Server.freeze }
   let(:json) { Oj.load(last_response.body) }
   let(:headers) { last_response.headers }
 
@@ -100,11 +100,11 @@ describe 'the server' do
 
   it 'handles JSONP' do
     get '/latest?callback=foo'
-    _(last_response.body).must_be :start_with?, 'foo'
+    _(last_response.body).must_be :start_with?, '/**/foo'
   end
 
-  it 'sets charset to UTF-8' do
+  it 'sets charset to utf-8' do
     get '/currencies'
-    _(last_response.headers['content-type']).must_be :end_with?, 'charset=UTF-8'
+    _(last_response.headers['content-type']).must_be :end_with?, 'charset=utf-8'
   end
 end

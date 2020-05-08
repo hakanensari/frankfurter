@@ -1,103 +1,93 @@
 # frozen_string_literal: true
 
 require 'oj'
+require 'rack/contrib/jsonp'
 require 'rack/cors'
-require 'sinatra'
+require 'roda'
 
 require 'currency_names'
 require 'query'
 require 'quote'
 
-use Rack::Cors do
-  allow do
-    origins '*'
-    resource '*', headers: :any, methods: :get
-  end
-end
+module Web
+  class Server < Roda
+    use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: %i[get options]
+      end
+    end
+    use Rack::JSONP
 
-configure :development do
-  set :show_exceptions, :after_handler
-end
+    plugin :caching
 
-configure :production do
-  disable :dump_errors
-end
+    plugin :error_handler do |_error|
+      request.halt [422, {}, nil]
+    end
 
-configure :test do
-  set :raise_errors, false
-end
+    plugin :indifferent_params
 
-set :static_cache_control, [:public, max_age: 300]
+    plugin :json, content_type: 'application/json; charset=utf-8',
+                  serializer: ->(o) { Oj.dump(o, mode: :compat) }
 
-helpers do
-  def end_of_day_quote
-    @end_of_day_quote ||= begin
-      query = Query.build(params)
+    plugin :params_capturing
+
+    route do |r|
+      r.root do
+        { docs: 'https://www.frankfurter.app/docs' }
+      end
+
+      r.is(/latest|current/) do
+        r.params['date'] = Date.today.to_s
+        quote = quote_end_of_day(r)
+        r.etag quote.cache_key
+
+        quote.formatted
+      end
+
+      r.is(/(\d{4}-\d{2}-\d{2})/) do
+        r.params['date'] = r.params['captures'].first
+        quote = quote_end_of_day(r)
+        r.etag quote.cache_key
+
+        quote.formatted
+      end
+
+      r.is(/(\d{4}-\d{2}-\d{2})\.\.(\d{4}-\d{2}-\d{2})?/) do
+        r.params['start_date'] = r.params['captures'].first
+        r.params['end_date'] = r.params['captures'][1] || Date.today.to_s
+        quote = quote_interval(r)
+        r.etag quote.cache_key
+
+        quote.formatted
+      end
+
+      r.is 'currencies' do
+        currency_names = CurrencyNames.new
+        r.etag currency_names.cache_key
+
+        currency_names.formatted
+      end
+    end
+
+    private
+
+    def quote_end_of_day(request)
+      query = Query.build(request.params)
       quote = Quote::EndOfDay.new(**query)
       quote.perform
-      halt 404 if quote.not_found?
+      request.halt [404, {}, nil] if quote.not_found?
 
       quote
     end
-  end
 
-  def interval_quote
-    @interval_quote ||= begin
-      query = Query.build(params)
+    def quote_interval(request)
+      query = Query.build(request.params)
       quote = Quote::Interval.new(**query)
       quote.perform
-      halt 404 if quote.not_found?
+      request.halt [404, {}, nil] if quote.not_found?
 
       quote
     end
   end
-
-  def json(data)
-    json = Oj.dump(data, mode: :compat)
-    callback = params['callback']
-
-    if callback
-      content_type :js, charset: Encoding::UTF_8
-      "#{callback}(#{json})"
-    else
-      content_type :json, charset: Encoding::UTF_8
-      json
-    end
-  end
-end
-
-get '/' do
-  json({ docs: 'https://www.frankfurter.app/docs' })
-end
-
-get '/(?:latest|current)', mustermann_opts: { type: :regexp } do
-  params[:date] = Date.today.to_s
-  etag end_of_day_quote.cache_key
-  json end_of_day_quote.formatted
-end
-
-get '/(?<date>\d{4}-\d{2}-\d{2})', mustermann_opts: { type: :regexp } do
-  etag end_of_day_quote.cache_key
-  json end_of_day_quote.formatted
-end
-
-get '/(?<start_date>\d{4}-\d{2}-\d{2})\.\.(?<end_date>\d{4}-\d{2}-\d{2})?',
-    mustermann_opts: { type: :regexp } do
-  @params[:end_date] ||= Date.today.to_s
-  etag interval_quote.cache_key
-  json interval_quote.formatted
-end
-
-get '/currencies' do
-  currency_names = CurrencyNames.new
-  etag currency_names.cache_key
-  json currency_names.formatted
-end
-
-not_found do
-  halt 404
-end
-
-error do
-  halt 422
 end

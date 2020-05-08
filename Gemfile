@@ -7,11 +7,12 @@ ruby '2.7.1'
 gem 'money'
 gem 'oj'
 gem 'ox'
+gem 'rack-contrib'
 gem 'rack-cors'
 gem 'rake'
+gem 'roda'
 gem 'rufus-scheduler'
 gem 'sequel_pg'
-gem 'sinatra'
 gem 'unicorn'
 
 group :test do

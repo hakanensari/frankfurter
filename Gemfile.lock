@@ -25,8 +25,6 @@ GEM
       minitest (>= 4, < 6)
     money (6.13.7)
       i18n (>= 0.6.4, <= 2)
-    mustermann (1.1.1)
-      ruby2_keywords (~> 0.0.1)
     oj (3.10.6)
     ox (2.13.2)
     parallel (1.19.1)
@@ -36,16 +34,18 @@ GEM
     public_suffix (4.0.4)
     raabro (1.1.6)
     rack (2.2.2)
+    rack-contrib (2.2.0)
+      rack (~> 2.0)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
-    rack-protection (2.0.8.1)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rainbow (3.0.0)
     raindrops (0.19.1)
     rake (13.0.1)
     rexml (3.2.4)
+    roda (3.31.0)
+      rack
     rubocop (0.82.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -61,7 +61,6 @@ GEM
     rubocop-sequel (0.0.6)
       rubocop (~> 0.55, >= 0.55)
     ruby-progressbar (1.10.1)
-    ruby2_keywords (0.0.2)
     rufus-scheduler (3.6.0)
       fugit (~> 1.1, >= 1.1.6)
     safe_yaml (1.0.5)
@@ -73,12 +72,6 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.2)
-    sinatra (2.0.8.1)
-      mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.8.1)
-      tilt (~> 2.0)
-    tilt (2.0.10)
     tzinfo (2.0.2)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)
@@ -101,16 +94,17 @@ DEPENDENCIES
   money
   oj
   ox
+  rack-contrib
   rack-cors
   rack-test
   rake
+  roda
   rubocop-minitest
   rubocop-performance
   rubocop-sequel
   rufus-scheduler
   sequel_pg
   simplecov
-  sinatra
   unicorn
   vcr
   webmock

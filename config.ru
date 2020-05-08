@@ -3,4 +3,4 @@
 require './config/environment'
 require 'web/server'
 
-run Sinatra::Application
+run Web::Server.freeze.app

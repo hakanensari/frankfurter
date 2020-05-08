@@ -1,7 +1,7 @@
 Metrics/AbcSize:
   Max: 21.79
 Metrics/BlockLength:
-  ExcludedMethods: ['describe', 'helpers']
+  ExcludedMethods: ['describe', 'route']
 Metrics/MethodLength:
   Max: 13
 Minitest:
