@@ -33,7 +33,7 @@ GEM
     pg (1.2.3)
     public_suffix (4.0.4)
     raabro (1.1.6)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-contrib (2.2.0)
       rack (~> 2.0)
     rack-cors (1.1.1)
