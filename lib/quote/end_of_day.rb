@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'quote/base'
+require 'digest'
 
 module Quote
   class EndOfDay < Base
