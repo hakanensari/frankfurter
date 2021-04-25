@@ -14,6 +14,7 @@ require_relative '../config/environment'
 require 'minitest/autorun'
 require 'minitest/around/spec'
 require 'minitest/focus'
+require 'pry-byebug'
 require 'vcr'
 require 'webmock'
 

@@ -12,9 +12,11 @@ namespace :db do
     Sequel::IntegerMigrator.new(db, dir, opts).run
   end
 
+  desc 'Run database migrations and seed data'
   task prepare: %w[db:migrate rates:all]
 
   namespace :test do
+    desc 'Run database migrations and seed with saved data'
     task :prepare do
       ENV['APP_ENV'] ||= 'test'
       Rake::Task['db:migrate'].invoke
