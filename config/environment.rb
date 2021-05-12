@@ -2,4 +2,4 @@
 
 require_relative 'app'
 $LOAD_PATH << App.root.join('lib')
-Dir[App.root.join('config/initializers/*.rb')].sort.each { |f| require f }
+Dir[App.root.join('config/initializers/*.rb')].each { |f| require f }
