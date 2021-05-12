@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.0.1'
+ruby File.read('.ruby-version').chomp
 
 gem 'money'
 gem 'oj'

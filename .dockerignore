@@ -1,7 +1,4 @@
 .*
+!.ruby-version
 Dockerfile
-LICENSE
-Procfile
 spec
-*.md
-*.yml
