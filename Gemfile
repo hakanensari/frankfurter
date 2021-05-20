@@ -14,6 +14,7 @@ gem 'roda'
 gem 'rufus-scheduler'
 gem 'sequel_pg'
 gem 'unicorn'
+gem 'scout_apm'
 
 group :development, :test do
   gem 'pry-byebug'
