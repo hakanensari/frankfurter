@@ -1,5 +1,5 @@
 build:
   docker:
     web: Dockerfile
-# run:
-#   web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
+run:
+  web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
