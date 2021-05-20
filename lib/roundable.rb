@@ -10,21 +10,22 @@ module Roundable
   #
   # https://en.wikipedia.org/wiki/Exchange_rate#Quotations
   def round(value)
-    if value > 5000
-      value.round
-    elsif value > 80
-      Float(format('%<value>.2f', value: value))
-    elsif value > 20
-      Float(format('%<value>.3f', value: value))
-    elsif value > 1
-      Float(format('%<value>.4f', value: value))
-    # I had originally opted to round smaller numbers simply to five decimal
-    # places but introduced this refinement to handle an edge case where a
-    # lower-rate base currency like IDR produces less precise quotes.
-    elsif value > 0.0001
-      Float(format('%<value>.5f', value: value))
-    else
-      Float(format('%<value>.6f', value: value))
-    end
+    value
+    # if value > 5000
+    #   value.round
+    # elsif value > 80
+    #   Float(format('%<value>.2f', value: value))
+    # elsif value > 20
+    #   Float(format('%<value>.3f', value: value))
+    # elsif value > 1
+    #   Float(format('%<value>.4f', value: value))
+    # # I had originally opted to round smaller numbers simply to five decimal
+    # # places but introduced this refinement to handle an edge case where a
+    # # lower-rate base currency like IDR produces less precise quotes.
+    # elsif value > 0.0001
+    #   Float(format('%<value>.5f', value: value))
+    # else
+    #   Float(format('%<value>.6f', value: value))
+    # end
   end
 end
