@@ -9,5 +9,4 @@ RUN gem install bundler
 RUN bundle config set without "development test"
 RUN bundle install --jobs=8
 ADD . /app
-#CMD ["bundle", "exec", "unicorn", "-p", "$PORT", "-c", "./config/unicorn.rb"]
 CMD ["bundle", "exec", "unicorn -p $PORT -c ./config/unicorn.rb"]

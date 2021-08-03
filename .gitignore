@@ -4,3 +4,5 @@ coverage
 pkg
 data/
 log/newrelic_agent.log
+telegraf.conf
+config/newrelic.yml
