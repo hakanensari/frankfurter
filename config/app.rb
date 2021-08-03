@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'pathname'
+require 'newrelic_rpm'
 
 # Encapsulates app configuration
 module App

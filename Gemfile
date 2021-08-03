@@ -15,6 +15,7 @@ gem 'rufus-scheduler'
 gem 'sequel_pg'
 gem 'unicorn'
 gem 'scout_apm'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'pry-byebug'

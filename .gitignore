@@ -3,3 +3,4 @@
 coverage
 pkg
 data/
+log/newrelic_agent.log
