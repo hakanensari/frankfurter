@@ -7,20 +7,20 @@ services:
       - database-data:/var/lib/postgresql/data/
     user: postgres
     environment:
-      POSTGRES_DB: frankfurtdb
-      POSTGRES_USER: postgresuser
-      POSTGRES_PASSWORD: postgrespw
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
   web:
     build: .
-    command: bundle exec unicorn -p 3000 -E production -c config/unicorn.rb
+    command: bundle exec unicorn -p ${WEB_PORT} -E production -c config/unicorn.rb
     volumes:
       - .:/app
     environment:
-      RACK_ENV: production 
-      RAILS_ENV: production 
-      DATABASE_URL: postgres://postgresuser:postgrespw@db/frankfurtdb
+      RACK_ENV: ${APP_ENV} 
+      RAILS_ENV: ${APP_ENV}  
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
     ports:
-      - "3000:3000"
+      - "${WEB_PORT}:${WEB_PORT}"
     depends_on:
       - db
 
