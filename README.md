@@ -85,6 +85,28 @@ docker run -d -p 3000:3000 \
 
 Check out http://localhost:3000/latest
 
+## Load testing
+We use [k6](https://k6.io) for load testing the API. 
+
+For local runs, just install k6 and go for it:
+```bash
+brew install k6
+k6 run spec/load_test/stress.js
+```
+
+If you want nice visualization, you might want to push the output to Grafana. Be sure to update your local copy of `telegraf.conf` with good values for username, password and url, see [k6 with Grafana Cloud](https://k6.io/docs/results-visualization/grafana-cloud/).
+
+```bash
+brew install k6 telegraf 
+ulimit -n 10240 # increase the number of open files allowed
+telegraf -config /usr/local/etc/telegraf.conf
+k6 run --out influxdb=http://localhost:8186 spec/load_test/stress.js
+```
+
+Now you should be able to see some stats in Grafana Cloud: 
+
+## Application Monitoring
+
 ## Miscellaneous
 
 Frankfurter was known as Fixer between 2012 and 2018. After selling the original domain, I relaunched under this name.
