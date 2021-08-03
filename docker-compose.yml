@@ -1,0 +1,28 @@
+version: "3.9"
+   
+services:
+  db:
+    image: postgres
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    user: postgres
+    environment:
+      POSTGRES_DB: frankfurtdb
+      POSTGRES_USER: postgresuser
+      POSTGRES_PASSWORD: postgrespw
+  web:
+    build: .
+    command: bundle exec unicorn -p 3000 -E production -c config/unicorn.rb
+    volumes:
+      - .:/app
+    environment:
+      RACK_ENV: production 
+      RAILS_ENV: production 
+      DATABASE_URL: postgres://postgresuser:postgrespw@db/frankfurtdb
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+volumes:
+    database-data: 
