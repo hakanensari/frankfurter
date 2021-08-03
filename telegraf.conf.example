@@ -1,0 +1,31 @@
+[agent]
+  interval = "10s"
+  round_interval = true
+  metric_batch_size = 5000
+  metric_buffer_limit = 100000
+  collection_jitter = "0s"
+  flush_interval = "1s"
+  flush_jitter = "0s"
+  precision = ""
+  debug = true
+  logtarget = "stderr"
+  hostname = ""
+  omit_hostname = false
+
+[[outputs.http]]
+  url = "https://prometheus-blocks-prod-us-central1.grafana.net/api/prom/push" # <--
+  username = "Prometheus username or Instance ID" # <--
+  password = "Grafana API Key (MetricsPublisher role)"    # <--
+  data_format = "prometheusremotewrite"
+
+[outputs.http.headers]
+  Content-Type = "application/x-protobuf"
+  Content-Encoding = "snappy"
+  X-Prometheus-Remote-Write-Version = "0.1.0"
+
+[[inputs.influxdb_listener]]
+  service_address = ":8186"
+  read_timeout = "10s"
+  write_timeout = "10s"
+  max_body_size = "32MiB"
+  name_prefix = "k6_"

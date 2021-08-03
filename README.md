@@ -28,6 +28,15 @@ https://api.frankfurter.app/2010-01-01..2010-01-31
 
 For more examples, read the [docs](https://www.frankfurter.app/docs).
 
+## Configuring your own instance
+
+You need to enter your own API keys and username/passwords for the following files:
+```bash
+cp config/newrelic.yml.example config/newrelic.yml
+cp .env.example .env
+cp telegraf.conf.example telegraf.conf
+```
+
 ## Deployment
 
 You can self-host Frankfurter with Docker.
