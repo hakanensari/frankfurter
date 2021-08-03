@@ -78,6 +78,8 @@ GEM
     ruby-progressbar (1.11.0)
     rufus-scheduler (3.7.0)
       fugit (~> 1.1, >= 1.1.6)
+    scout_apm (4.1.1)
+      parser
     sequel (5.43.0)
     sequel_pg (1.14.0)
       pg (>= 0.18.0, != 1.2.0)
@@ -121,6 +123,7 @@ DEPENDENCIES
   rubocop-rake
   rubocop-sequel
   rufus-scheduler
+  scout_apm
   sequel_pg
   simplecov
   unicorn
