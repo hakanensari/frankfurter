@@ -105,8 +105,16 @@ k6 run --out influxdb=http://localhost:8186 spec/load_test/stress.js
 
 Now you should be able to see some stats in Grafana Cloud: 
 
-## Application Monitoring
+## Running tests
+
+You need an instance of PostgreSQL to run the tests, start one using the Docker instructions above. 
+
+```bash 
+bundle exec rake
+```
 
 ## Miscellaneous
+
+In this fork there is no rounding of the rates in order to support better precision for downstream applications.
 
 Frankfurter was known as Fixer between 2012 and 2018. After selling the original domain, I relaunched under this name.

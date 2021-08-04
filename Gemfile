@@ -4,9 +4,9 @@ source 'https://rubygems.org'
 
 ruby File.read('.ruby-version').chomp
 
-gem 'dotenv-rails', groups: [:development, :test]
-
+gem 'dotenv-rails'
 gem 'money'
+gem 'newrelic_rpm'
 gem 'oj'
 gem 'ox'
 gem 'rack-contrib'
@@ -14,10 +14,9 @@ gem 'rack-cors'
 gem 'rake'
 gem 'roda'
 gem 'rufus-scheduler'
+gem 'scout_apm'
 gem 'sequel_pg'
 gem 'unicorn'
-gem 'scout_apm'
-gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'pry-byebug'
