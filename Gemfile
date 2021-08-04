@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 
 ruby File.read('.ruby-version').chomp
 
+gem 'dotenv-rails', groups: [:development, :test]
+
 gem 'money'
 gem 'oj'
 gem 'ox'
