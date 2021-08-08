@@ -35,8 +35,8 @@ describe Roundable do
 
   it 'conforms to ECB conventions' do
     require 'day'
-    rates = Day.all.sample.rates.to_a
-    rates.shuffle.each do |_currency, rate|
+    rates = JSON.parse(Day.all.sample.rates)
+    rates.to_a.shuffle.each do |_currency, rate|
       _(round(rate)).must_equal rate
     end
   end

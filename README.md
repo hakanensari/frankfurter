@@ -41,43 +41,13 @@ cp telegraf.conf.example telegraf.conf
 
 You can self-host Frankfurter with Docker.
 
-### Using existing PostgreSQL 
+### Using Docker
 
 ```bash
-docker build -t frankfurter .
-
-docker run -d -p 8080:8080 \
-  -e "DATABASE_URL=<postgres_url>" \
-  --name frankfurter frankfurter
-```
-
-Check out http://localhost:3000/latest
-
-### Using Docker Compose
-
-```bash
-docker compose up
-```
-
-Check out http://localhost:3000/latest
-
-To connect to the database instance; `psql -h db -d frankfurtdb -U postgresuser -W`
-
-### Using local, Dockerized PostgreSQL
-
-```bash
-docker pull postgres
-docker run --name postgres \
-  -p 5432:5432 \
-  -e POSTGRES_DB=frankfurtdb \
-  -e POSTGRES_USER=postgresuser \
-  -e POSTGRES_PASSWORD=postgrespw \
-  -d postgres 
-
 docker build -t frankfurter .
 
 docker run -d -p 3000:3000 \
-  -e "DATABASE_URL=postgres://postgresuser:postgrespw@host.docker.internal/frankfurtdb" \
+  -e "SQLITE_DB=frankfurtdb.db" \
   -e PORT=3000 \
   --name frankfurter \
   -it frankfurter
@@ -103,11 +73,9 @@ telegraf -config /usr/local/etc/telegraf.conf
 k6 run --out influxdb=http://localhost:8186 spec/load_test/stress.js
 ```
 
-Now you should be able to see some stats in Grafana Cloud: 
+Now you should be able to see some stats in Grafana Cloud.
 
 ## Running tests
-
-You need an instance of PostgreSQL to run the tests, start one using the Docker instructions above. 
 
 ```bash 
 bundle exec rake

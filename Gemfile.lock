@@ -66,7 +66,6 @@ GEM
     parallel (1.20.1)
     parser (3.0.1.0)
       ast (~> 2.4.1)
-    pg (1.2.3)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -126,16 +125,14 @@ GEM
       fugit (~> 1.1, >= 1.1.6)
     scout_apm (4.1.1)
       parser
-    sequel (5.43.0)
-    sequel_pg (1.14.0)
-      pg (>= 0.18.0, != 1.2.0)
-      sequel (>= 4.38.0)
+    sequel (5.47.0)
     simplecov (0.21.2)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.2)
+    sqlite3 (1.4.2)
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -174,8 +171,9 @@ DEPENDENCIES
   rubocop-sequel
   rufus-scheduler
   scout_apm
-  sequel_pg
+  sequel
   simplecov
+  sqlite3
   unicorn
   vcr
   webmock

@@ -15,8 +15,9 @@ class Day < Sequel::Model
     def currencies
       select(:date,
              Sequel.lit('rates.key').as(:iso_code),
-             Sequel.lit('rates.value::text::float').as(:rate))
-        .join(Sequel.function(:jsonb_each, :rates).lateral.as(:rates), true)
+             Sequel.lit('rates.value').as(:rate))
+        .order(Sequel.asc(:iso_code))
+        .join(Sequel.function(:json_each, :rates).as(:rates), true)
     end
   end
 end

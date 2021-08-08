@@ -4,7 +4,7 @@ Sequel.migration do
   up do
     create_table :days do
       date  :date
-      jsonb :rates
+      json1 :rates
       index :date, unique: true
     end
     drop_table :currencies

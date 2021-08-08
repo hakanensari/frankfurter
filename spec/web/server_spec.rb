@@ -47,6 +47,7 @@ describe 'the server' do
   it 'works around holidays' do
     get '/2010-01-01'
     _(json['rates']).wont_be :empty?
+    _(json['date']).must_equal '2009-12-31'
   end
 
   it 'returns an ETag' do
@@ -81,15 +82,17 @@ describe 'the server' do
 
   it 'returns rates for a given period' do
     get '/2010-01-01..2010-12-31'
+
     _(json['start_date']).wont_be :empty?
+    _(json['start_date']).must_equal '2010-01-04' # ECB only has rates for working days
     _(json['end_date']).wont_be :empty?
+    _(json['end_date']).must_equal '2010-12-31'
     _(json['rates']).wont_be :empty?
   end
 
   it 'returns rates when given period does not include end date' do
     get '/2010-01-01..'
-    _(json['start_date']).wont_be :empty?
-    _(json['end_date']).wont_be :empty?
+    _(json['date']).wont_be :empty?
     _(json['rates']).wont_be :empty?
   end
 

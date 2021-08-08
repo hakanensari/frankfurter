@@ -45,7 +45,7 @@ module Web
         quote.formatted
       end
 
-      r.is(/(\d{4}-\d{2}-\d{2})/) do
+      r.is(/(\d{4}-\d{2}-\d{2})(\.\.)?/) do
         r.params['date'] = r.params['captures'].first
         quote = quote_end_of_day(r)
         r.etag quote.cache_key
@@ -53,7 +53,7 @@ module Web
         quote.formatted
       end
 
-      r.is(/(\d{4}-\d{2}-\d{2})\.\.(\d{4}-\d{2}-\d{2})?/) do
+      r.is(/(\d{4}-\d{2}-\d{2})\.\.(\d{4}-\d{2}-\d{2})/) do
         r.params['start_date'] = r.params['captures'].first
         r.params['end_date'] = r.params['captures'][1] || Date.today.to_s
         quote = quote_interval(r)

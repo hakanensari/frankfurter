@@ -17,13 +17,13 @@ class Currency < Sequel::Model(Day.currencies)
 
     def between(interval)
       case interval.last - interval.first
-      when 366.. then super.sample('week')
+      when 366.. then super.sample('%w')
       else super
       end
     end
 
     def sample(precision)
-      sampler = Sequel.function(:date_trunc, precision, :date)
+      sampler = Sequel.function(:strftime, precision, :date)
 
       select(:iso_code)
         .select_append { avg(rate).as(rate) }

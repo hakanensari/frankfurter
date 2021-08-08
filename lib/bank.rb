@@ -41,7 +41,7 @@ module Bank
 
     def jsonify!(data)
       data.each do |day|
-        day[:rates] = Sequel.pg_jsonb(day[:rates])
+        day[:rates] = day[:rates].to_json
       end
     end
   end

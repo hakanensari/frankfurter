@@ -15,7 +15,8 @@ gem 'rake'
 gem 'roda'
 gem 'rufus-scheduler'
 gem 'scout_apm'
-gem 'sequel_pg'
+gem 'sequel'
+gem 'sqlite3'
 gem 'unicorn'
 
 group :development, :test do
