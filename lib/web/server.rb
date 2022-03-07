@@ -21,8 +21,9 @@ module Web
 
     plugin :caching
 
-    plugin :error_handler do |_error|
-      request.halt [422, {}, nil]
+    plugin :halt
+    plugin :error_handler do |error|
+      request.halt 422, { message: error.message }
     end
 
     plugin :indifferent_params
@@ -76,7 +77,7 @@ module Web
       query = Query.build(request.params)
       quote = Quote::EndOfDay.new(**query)
       quote.perform
-      request.halt [404, {}, nil] if quote.not_found?
+      request.halt 404, { message: 'not found' } if quote.not_found?
 
       quote
     end
@@ -85,7 +86,7 @@ module Web
       query = Query.build(request.params)
       quote = Quote::Interval.new(**query)
       quote.perform
-      request.halt [404, {}, nil] if quote.not_found?
+      request.halt 404, { message: 'not found' } if quote.not_found?
 
       quote
     end
