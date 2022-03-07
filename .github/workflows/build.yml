@@ -6,7 +6,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-       image: ruby:3.0.1
+      image: ruby:3.1.1
     services:
       postgres:
         image: postgres:12
@@ -16,22 +16,22 @@ jobs:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
-    - uses: actions/checkout@v2
-    - run: gem install bundler
-    - run: bundle install --jobs 4 --retry 3
-    - run: bundle exec rake
-      env:
-        DATABASE_URL: postgres://postgres@postgres/postgres
+      - uses: actions/checkout@v2
+      - run: gem install bundler
+      - run: bundle install --jobs 4 --retry 3
+      - run: bundle exec rake
+        env:
+          DATABASE_URL: postgres://postgres@postgres/postgres
 
   publish:
     needs: test
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: elgohr/Publish-Docker-Github-Action@2.14
-      with:
-        name: hakanensari/frankfurter
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        tag_names: true
+      - uses: actions/checkout@v2
+      - uses: elgohr/Publish-Docker-Github-Action@2.14
+        with:
+          name: hakanensari/frankfurter
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tag_names: true
