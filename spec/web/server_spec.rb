@@ -60,6 +60,7 @@ describe 'the server' do
     %w[/ /latest /2012-11-20].each do |path|
       header 'Origin', '*'
       get path
+
       assert headers.key?('Access-Control-Allow-Methods')
     end
   end
@@ -70,6 +71,7 @@ describe 'the server' do
       header 'Access-Control-Request-Method', 'GET'
       header 'Access-Control-Request-Headers', 'Content-Type'
       options path
+
       assert headers.key?('Access-Control-Allow-Methods')
     end
   end

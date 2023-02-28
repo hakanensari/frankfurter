@@ -34,7 +34,7 @@ describe Roundable do
   end
 
   it 'conforms to ECB conventions' do
-    skip "We don't conform ¯\_(ツ)_/¯"
+    skip "We don't conform ¯_(ツ)_/¯"
     require 'day'
     rates = Day.all.sample.rates.to_a
     rates.shuffle.each do |_currency, rate|

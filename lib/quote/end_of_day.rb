@@ -6,8 +6,8 @@ require 'digest'
 module Quote
   class EndOfDay < Base
     def formatted
-      { amount: amount,
-        base: base,
+      { amount:,
+        base:,
         date: result.keys.first,
         rates: result.values.first }
     end

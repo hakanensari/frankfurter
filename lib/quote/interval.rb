@@ -5,8 +5,8 @@ require 'quote/base'
 module Quote
   class Interval < Base
     def formatted
-      { amount: amount,
-        base: base,
+      { amount:,
+        base:,
         start_date: result.keys.first,
         end_date: result.keys.last,
         rates: result }

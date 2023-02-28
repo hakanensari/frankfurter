@@ -10,7 +10,7 @@ module Quote
     end
 
     let(:quote) do
-      EndOfDay.new(date: date)
+      EndOfDay.new(date:)
     end
 
     before do
@@ -40,7 +40,7 @@ module Quote
 
     describe 'given a new base' do
       let(:quote) do
-        EndOfDay.new(date: date, base: 'USD')
+        EndOfDay.new(date:, base: 'USD')
       end
 
       it 'quotes against that base' do
@@ -55,7 +55,7 @@ module Quote
 
     describe 'given symbols' do
       let(:quote) do
-        EndOfDay.new(date: date, symbols: %w[USD GBP JPY])
+        EndOfDay.new(date:, symbols: %w[USD GBP JPY])
       end
 
       it 'quotes only for those symbols' do
@@ -72,7 +72,7 @@ module Quote
 
     describe 'when given an amount' do
       let(:quote) do
-        EndOfDay.new(date: date, amount: 100)
+        EndOfDay.new(date:, amount: 100)
       end
 
       it 'calculates quotes for that amount' do

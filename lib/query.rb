@@ -32,6 +32,6 @@ class Query
   end
 
   def to_h
-    { amount: amount, base: base, date: date, symbols: symbols }.compact
+    { amount:, base:, date:, symbols: }.compact
   end
 end

@@ -1,7 +1,7 @@
 Metrics/AbcSize:
   Max: 25.04
 Metrics/BlockLength:
-  IgnoredMethods: ['describe', 'route']
+  AllowedMethods: ['describe', 'route']
 Metrics/MethodLength:
   Max: 13
 Minitest:

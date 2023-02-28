@@ -46,6 +46,7 @@ module Quote
 
       it 'performs only once' do
         quote.perform
+
         refute quote.perform
       end
     end
@@ -56,12 +57,12 @@ module Quote
       end
 
       let(:quote) do
-        klass.new(date: date, base: 'ILS')
+        klass.new(date:, base: 'ILS')
       end
 
       before do
         def quote.fetch_data
-          [{ date: date, iso_code: 'USD', rate: 1 }]
+          [{ date:, iso_code: 'USD', rate: 1 }]
         end
       end
 
@@ -77,12 +78,12 @@ module Quote
       end
 
       let(:quote) do
-        klass.new(date: date, base: 'USD', symbols: ['FOO'])
+        klass.new(date:, base: 'USD', symbols: ['FOO'])
       end
 
       before do
         def quote.fetch_data
-          [{ date: date, iso_code: 'USD', rate: 1 }]
+          [{ date:, iso_code: 'USD', rate: 1 }]
         end
       end
 

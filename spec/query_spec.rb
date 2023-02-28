@@ -60,14 +60,14 @@ describe Query do
 
   it 'returns given date' do
     date = '2014-01-01'
-    query = Query.new(date: date)
+    query = Query.new(date:)
     _(query.date).must_equal Date.parse(date)
   end
 
   it 'returns given date interval' do
     start_date = '2014-01-01'
     end_date = '2014-12-31'
-    query = Query.new(start_date: start_date, end_date: end_date)
+    query = Query.new(start_date:, end_date:)
     _(query.date).must_equal((Date.parse(start_date)..Date.parse(end_date)))
   end
 end
