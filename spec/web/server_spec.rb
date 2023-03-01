@@ -56,6 +56,13 @@ describe 'the server' do
     end
   end
 
+  it 'returns a cache control header' do
+    %w[/latest /2012-11-20].each do |path|
+      get path
+      _(headers['Cache-Control']).wont_be_nil
+    end
+  end
+
   it 'allows cross-origin requests' do
     %w[/ /latest /2012-11-20].each do |path|
       header 'Origin', '*'

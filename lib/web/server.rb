@@ -34,6 +34,8 @@ module Web
     plugin :params_capturing
 
     route do |r|
+      response.cache_control public: true, max_age: 900
+
       r.root do
         { docs: 'https://www.frankfurter.app/docs' }
       end
