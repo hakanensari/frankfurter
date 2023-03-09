@@ -42,7 +42,7 @@ GEM
       pry (>= 0.13, < 0.15)
     public_suffix (5.0.1)
     raabro (1.4.0)
-    rack (2.2.6.2)
+    rack (2.2.6.3)
     rack-contrib (2.3.0)
       rack (~> 2.0)
     rack-cors (2.0.0)
