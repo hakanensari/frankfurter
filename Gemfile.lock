@@ -53,7 +53,8 @@ GEM
     raindrops (0.20.1)
     rake (13.0.6)
     regexp_parser (2.7.0)
-    rexml (3.2.5)
+    rexml (3.2.8)
+      strscan (>= 3.0.9)
     roda (3.65.0)
       rack
     rubocop (1.46.0)
@@ -90,6 +91,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
+    strscan (3.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
