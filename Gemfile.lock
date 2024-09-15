@@ -53,7 +53,7 @@ GEM
     raindrops (0.20.1)
     rake (13.0.6)
     regexp_parser (2.7.0)
-    rexml (3.3.3)
+    rexml (3.3.6)
       strscan
     roda (3.65.0)
       rack
