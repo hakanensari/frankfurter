@@ -45,7 +45,7 @@ GEM
     public_suffix (5.0.1)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.0.11)
+    rack (3.1.7)
     rack-contrib (2.5.0)
       rack (< 4)
     rack-cors (2.0.0)
@@ -57,7 +57,7 @@ GEM
     rake (13.0.6)
     regexp_parser (2.9.2)
     rexml (3.3.7)
-    roda (3.65.0)
+    roda (3.84.0)
       rack
     rubocop (1.66.1)
       json (~> 2.3)
