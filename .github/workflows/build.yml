@@ -5,30 +5,30 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
-    container:
-      image: ruby:3.2.1
     services:
       postgres:
-        image: postgres:15
+        image: postgres:17
         env:
           POSTGRES_HOST_AUTH_METHOD: trust
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
       - run: gem install bundler
-      - run: bundle install --jobs 4 --retry 3
+      - run: bundle install
       - run: bundle exec rake
         env:
-          DATABASE_URL: postgres://postgres@postgres/postgres
-
+          DATABASE_URL: postgres://postgres@localhost/postgres
   publish:
     needs: test
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: hakanensari/frankfurter
