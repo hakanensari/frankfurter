@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Sequel.migration do
-  change do
+  up do
     create_table :currencies do
       Date    :date
       String  :iso_code
@@ -9,5 +9,9 @@ Sequel.migration do
 
       index %i[date iso_code], unique: true
     end
+  end
+
+  down do
+    drop_table :currencies
   end
 end
