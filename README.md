@@ -35,3 +35,11 @@ docker run -d -p 8080:8080 \
   -e "DATABASE_URL=<postgres_url>" \
   --name frankfurter hakanensari/frankfurter
 ```
+
+Alternatively, copy the [docker-compose.yml](./docker-compose.yml) file to your system, and in the same directory run:
+
+```bash
+docker compose up --wait 
+```
+
+This will also setup and host the PostgreSQL for Frankfurter.
