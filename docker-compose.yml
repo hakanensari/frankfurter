@@ -1,0 +1,42 @@
+version: "3"
+services:
+  db:
+    image: postgres:15
+    container_name: frankfurter-db
+    environment:
+      - PGUSER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - ./api_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - postgres-db-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+  api:
+    image: hakanensari/frankfurter
+    container_name: frankfurter-api
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: postgresql://postgres:password@db:5432/postgres
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - postgres-db-network
+    healthcheck:
+      test: curl --fail http://localhost:8080 || exit 1
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+networks:
+  postgres-db-network:
+    driver: bridge
