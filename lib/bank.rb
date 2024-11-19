@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'day'
-require 'bank/feed'
+require "day"
+require "bank/feed"
 
 module Bank
   class << self

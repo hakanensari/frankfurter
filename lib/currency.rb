@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'day'
-require 'forwardable'
+require "day"
+require "forwardable"
 
 class Currency < Sequel::Model(Day.currencies)
   class << self
@@ -17,7 +17,7 @@ class Currency < Sequel::Model(Day.currencies)
 
     def between(interval)
       case interval.last - interval.first
-      when 366.. then super.sample('week')
+      when 366.. then super.sample("week")
       else super
       end
     end

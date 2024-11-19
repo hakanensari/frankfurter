@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-desc 'Load environment'
+desc "Load environment"
 task :environment do
-  require './config/environment'
+  require "./config/environment"
 end

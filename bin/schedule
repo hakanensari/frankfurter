@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'rufus-scheduler'
+require "rufus-scheduler"
 
 scheduler = Rufus::Scheduler.new
 
-scheduler.cron '*/30 15,16,17 * * 1-5' do
-  `rake rates:current`
+scheduler.cron("*/30 15,16,17 * * 1-5") do
+  %x(rake rates:current)
 end
 
 scheduler.join

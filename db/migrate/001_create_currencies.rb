@@ -7,7 +7,7 @@ Sequel.migration do
       String  :iso_code
       Float   :rate
 
-      index %i[date iso_code], unique: true
+      index [:date, :iso_code], unique: true
     end
   end
 

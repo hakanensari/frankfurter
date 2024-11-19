@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
-require 'quote/base'
-require 'digest'
+require "quote/base"
+require "digest"
 
 module Quote
   class EndOfDay < Base
     def formatted
-      { amount:,
+      {
+        amount:,
         base:,
         date: result.keys.first,
-        rates: result.values.first }
+        rates: result.values.first,
+      }
     end
 
     def cache_key
@@ -21,7 +23,7 @@ module Quote
     private
 
     def fetch_data
-      require 'currency'
+      require "currency"
 
       scope = Currency.latest(date)
       scope = scope.only(*(symbols + [base])) if symbols

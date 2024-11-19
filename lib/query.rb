@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class Query
-  def self.build(params)
-    new(params).to_h
+  class << self
+    def build(params)
+      new(params).to_h
+    end
   end
 
   def initialize(params = {})
@@ -20,7 +22,7 @@ class Query
   end
 
   def symbols
-    @params.values_at(:to, :symbols).compact.first&.upcase&.split(',')
+    @params.values_at(:to, :symbols).compact.first&.upcase&.split(",")
   end
 
   def date

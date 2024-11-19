@@ -15,7 +15,7 @@ Sequel.migration do
       date    :date
       string  :iso_code
       float   :rate
-      index %i[date iso_code], unique: true
+      index [:date, :iso_code], unique: true
     end
     drop_table :days
   end

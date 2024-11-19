@@ -4,8 +4,10 @@ module Scheduler
   class Daemon
     attr_reader :pid
 
-    def self.start
-      new.start
+    class << self
+      def start
+        new.start
+      end
     end
 
     def initialize
@@ -25,7 +27,7 @@ module Scheduler
     private
 
     def run
-      load 'bin/schedule'
+      load("bin/schedule")
     end
 
     def monitor_child
@@ -33,7 +35,7 @@ module Scheduler
 
       @child_monitor = Thread.new do
         loop do
-          sleep 5
+          sleep(5)
           unless alive?(pid)
             @pid = nil
             start
@@ -46,7 +48,7 @@ module Scheduler
       Thread.new do
         loop do
           exit unless alive?(@parent_pid)
-          sleep 1
+          sleep(1)
         end
       end
     end

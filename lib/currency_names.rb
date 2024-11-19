@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'currency'
-require 'money/currency'
+require "currency"
+require "money/currency"
 
 class CurrencyNames
   def cache_key
@@ -17,7 +17,7 @@ class CurrencyNames
   private
 
   def iso_codes
-    currencies.map(&:iso_code).append('EUR').sort
+    currencies.map(&:iso_code).append("EUR").sort
   end
 
   def currencies

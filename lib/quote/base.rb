@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require 'roundable'
+require "roundable"
 
 module Quote
   class Base
     include Roundable
 
-    DEFAULT_BASE = 'EUR'
+    DEFAULT_BASE = "EUR"
 
     attr_reader :amount, :base, :date, :symbols, :result
 
-    def initialize(date:, amount: 1.0, base: 'EUR', symbols: nil)
+    def initialize(date:, amount: 1.0, base: "EUR", symbols: nil)
       @date = date
       @amount = amount
       @base = base
@@ -29,7 +29,7 @@ module Quote
     end
 
     def must_rebase?
-      base != 'EUR'
+      base != "EUR"
     end
 
     def formatted
@@ -64,16 +64,16 @@ module Quote
 
     def rebase_rates
       result.each do |date, rates|
-        rates['EUR'] = amount if symbols.nil? || symbols.include?('EUR')
+        rates["EUR"] = amount if symbols.nil? || symbols.include?("EUR")
         divisor = rates.delete(base)
         if divisor.nil? || rates.empty?
           result.delete(date)
         else
           result[date] = rates.sort
-                              .map! do |iso_code, rate|
-                                [iso_code, round(amount * rate / divisor)]
-                              end
-                              .to_h
+            .map! do |iso_code, rate|
+            [iso_code, round(amount * rate / divisor)]
+          end
+            .to_h
         end
       end
     end

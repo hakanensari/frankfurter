@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
-require 'quote/base'
+require "quote/base"
 
 module Quote
   class Interval < Base
     def formatted
-      { amount:,
+      {
+        amount:,
         base:,
         start_date: result.keys.first,
         end_date: result.keys.last,
-        rates: result }
+        rates: result,
+      }
     end
 
     def cache_key
@@ -21,7 +23,7 @@ module Quote
     private
 
     def fetch_data
-      require 'currency'
+      require "currency"
 
       scope = Currency.between(date)
       scope = scope.only(*(symbols + [base])) if symbols
