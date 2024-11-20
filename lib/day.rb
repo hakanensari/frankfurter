@@ -15,6 +15,7 @@ class Day < Sequel::Model
         interval.begin,
       ))
         .where(Sequel.expr(:date) <= interval.end)
+        .order(Sequel.asc(:date))
     end
 
     def currencies
