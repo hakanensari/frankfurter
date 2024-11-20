@@ -28,7 +28,6 @@ group :test do
   gem "minitest-around"
   gem "minitest-focus"
   gem "rack-test"
-  gem "simplecov"
   gem "vcr"
   gem "webmock"
 end

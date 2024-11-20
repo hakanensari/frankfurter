@@ -2,13 +2,6 @@
 
 ENV["APP_ENV"] ||= "test"
 
-# Keep SimpleCov at top.
-require "simplecov"
-
-SimpleCov.start do
-  add_filter "/spec/"
-end
-
 require_relative "../config/environment"
 
 require "minitest/autorun"

@@ -10,7 +10,6 @@ GEM
     crack (1.0.0)
       bigdecimal
       rexml
-    docile (1.4.1)
     et-orbi (1.2.11)
       tzinfo
     fugit (1.11.1)
@@ -88,12 +87,6 @@ GEM
     sequel_pg (1.17.1)
       pg (>= 0.18.0, != 1.2.0)
       sequel (>= 4.38.0)
-    simplecov (0.22.0)
-      docile (~> 1.1)
-      simplecov-html (~> 0.11)
-      simplecov_json_formatter (~> 0.1)
-    simplecov-html (0.13.1)
-    simplecov_json_formatter (0.1.4)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
@@ -129,7 +122,6 @@ DEPENDENCIES
   rubocop-shopify
   rufus-scheduler
   sequel_pg
-  simplecov
   unicorn
   vcr
   webmock
