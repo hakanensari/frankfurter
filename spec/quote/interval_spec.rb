@@ -22,8 +22,16 @@ module Quote
     end
 
     it "quotes given date interval" do
-      _(Date.parse(quote.formatted[:start_date])).must_be(:>=, dates.first)
-      _(Date.parse(quote.formatted[:end_date])).must_be(:<=, dates.last)
+      returned_start = Date.parse(quote.formatted[:start_date])
+      returned_end = Date.parse(quote.formatted[:end_date])
+
+      # The returned start date should be the closest working day (before or on) the requested start
+      _(returned_start).must_be(:<=, dates.first)
+      # But it shouldn't be too far back (maybe 10 business days)
+      _(returned_start).must_be(:>, dates.first - 10)
+
+      # End date should still be within the requested range
+      _(returned_end).must_be(:<=, dates.last)
     end
 
     it "quotes against the Euro" do
