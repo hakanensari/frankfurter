@@ -15,7 +15,6 @@ class Day < Sequel::Model
         interval.begin,
       ))
         .where(Sequel.expr(:date) <= interval.end)
-        .order(Sequel.asc(:date))
     end
 
     def currencies
@@ -25,6 +24,7 @@ class Day < Sequel::Model
         Sequel.lit("rates.value::text::float").as(:rate),
       )
         .join(Sequel.function(:jsonb_each, :rates).lateral.as(:rates), true)
+        .order(Sequel.asc(:date), Sequel.asc(Sequel.lit("rates.key")))
     end
 
     def _nearest_date_with_rates(date)
