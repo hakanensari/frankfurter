@@ -47,5 +47,6 @@ Frankfurter is built with Ruby. To contribute:
     - [ ] IMF
     - [ ] Other central banks
 
-- [ ] API Features
+- [ ] Features
   - [ ] Add GraphQL endpoint.
+  - [ ] Deploy as a blockchain oracle.
