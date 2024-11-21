@@ -42,7 +42,7 @@ module Web
           name: "Frankfurter",
           description: "A currency data API",
           docs: "https://frankfurter.dev",
-          source: "https://github.com/hakanensari/frankfurter",
+          source: "https://github.com/lineofflight/frankfurter",
         }
       end
 
