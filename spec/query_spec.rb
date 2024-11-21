@@ -69,6 +69,10 @@ describe Query do
     _(query.date).must_equal(Date.parse(date))
   end
 
+  it "requires a valid date" do
+    _ { Query.new(date: "2014-01-32").to_h }.must_raise(Date::Error)
+  end
+
   it "returns given date interval" do
     start_date = "2014-01-01"
     end_date = "2014-12-31"
