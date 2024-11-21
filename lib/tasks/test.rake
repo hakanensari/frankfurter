@@ -7,12 +7,12 @@ rescue LoadError
   return
 end
 
-Rake::TestTask.new(test: :environment) do |t|
-  t.libs.push("lib")
+Rake::TestTask.new(spec: :environment) do |t|
+  t.libs << "lib"
+  t.libs << "test"
   t.test_files = FileList["spec/**/*_spec.rb"]
-  t.ruby_opts += ["-W0"]
 end
 
 RuboCop::RakeTask.new
 
-task default: ["rubocop", "db:test:prepare", "test"]
+task default: ["rubocop", "db:test:prepare", "spec"]
