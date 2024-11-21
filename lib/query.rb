@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
+# FIXME: Validations are all over. Clean up!
 class Query
   class << self
     def build(params)
-      new(params).to_h
+      query = new(params).to_h
+      raise ArgumentError, "bad currency pair" if [query[:base]] == query[:symbols]
+
+      query
     end
   end
 

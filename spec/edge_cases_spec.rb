@@ -53,4 +53,11 @@ describe "the server" do
       raise Sequel::Rollback
     end
   end
+
+  it "will not process circular conversions" do
+    get "/latest?from=EUR&to=EUR"
+    _(last_response).must_be(:unprocessable?)
+    get "/latest?from=USD&to=USD"
+    _(last_response).must_be(:unprocessable?)
+  end
 end
