@@ -38,7 +38,12 @@ module Web
       response.cache_control(public: true, max_age: 900)
 
       r.root do
-        { docs: "https://www.frankfurter.app/docs" }
+        {
+          name: "Frankfurter",
+          description: "A currency data API",
+          docs: "https://frankfurter.dev",
+          source: "https://github.com/hakanensari/frankfurter",
+        }
       end
 
       r.is(/latest|current/) do
