@@ -13,6 +13,11 @@ describe Query do
     _(query.amount).must_equal(100.0)
   end
 
+  it "requires a positive amount" do
+    _ { Query.new(amount: "0").to_h }.must_raise(ArgumentError)
+    _ { Query.new(amount: "-1").to_h }.must_raise(ArgumentError)
+  end
+
   it "defaults amount to nothing" do
     query = Query.new
     _(query.amount).must_be_nil

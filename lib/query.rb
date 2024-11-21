@@ -14,7 +14,10 @@ class Query
   def amount
     return unless @params[:amount]
 
-    @params[:amount].to_f
+    value = @params[:amount].to_f
+    raise ArgumentError, "invalid amount" unless value.positive?
+
+    value
   end
 
   def base

@@ -23,6 +23,11 @@ describe "the server" do
     _(last_response).must_be(:unprocessable?)
   end
 
+  it "will not process an invalid amount" do
+    get "/latest?amount=0&from=USD&to=EUR"
+    _(last_response).must_be(:unprocessable?)
+  end
+
   it "will not process a date before 2000" do
     get "/1999-01-01"
     _(last_response).must_be(:not_found?)
