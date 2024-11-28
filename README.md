@@ -2,6 +2,12 @@
 
 [![Build](https://github.com/hakanensari/frankfurter/workflows/build/badge.svg)](https://github.com/hakanensari/frankfurter/actions)
 
+> ⚠️ **Note**: This is the legacy version of Frankfurter with the original unversioned API.
+> For the new versioned API, please visit the `main` branch.
+>
+> - Legacy API Docker image: `hakanensari/frankfurter`
+> - New API Docker image: `lineofflight/frankfurter`
+
 [Frankfurter](https://frankfurter.dev) is a free and open-source currency data API that tracks reference exchange rates published by the European Central Bank.
 
 ## Deployment
@@ -35,18 +41,3 @@ Frankfurter is built with Ruby. To contribute:
 3. Run tests with `bundle exec rake`.
 4. Push your changes to a feature branch.
 5. Open a pull request.
-
-## Roadmap
-
-- [ ] Infrastructure
-  - [ ] Migrate from PostgreSQL to SQLite for simpler deployment.
-  - [ ] Add API versioning in URL path.
-
-- [ ] Data Sources
-  - [ ] Add support for multiple data providers.
-    - [ ] IMF
-    - [ ] Other central banks
-
-- [ ] Features
-  - [ ] Add GraphQL endpoint.
-  - [ ] Deploy as a blockchain oracle.
