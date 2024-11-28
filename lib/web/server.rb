@@ -20,7 +20,7 @@ module Web
       r.root do
         {
           name: "Frankfurter",
-          description: "Exchange Rates API",
+          description: "Currency data API",
           versions: {
             "v1" => "/v1",
           },
