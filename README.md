@@ -1,6 +1,6 @@
 # Frankfurter
 
-[![Build](https://github.com/hakanensari/frankfurter/workflows/build/badge.svg)](https://github.com/hakanensari/frankfurter/actions)
+[![Build](https://github.com/lineofflight/frankfurter/workflows/build/badge.svg)](https://github.com/lineofflight/frankfurter/actions)
 
 [Frankfurter](https://frankfurter.dev) is a free and open-source currency data API that tracks reference exchange rates published by the European Central Bank.
 
@@ -13,7 +13,7 @@ The simplest way to run Frankfurter is with Docker:
 ```bash
 docker run -d -p 8080:8080 \
   -e "DATABASE_URL=<postgres_url>" \
-  --name frankfurter hakanensari/frankfurter
+  --name frankfurter lineofflight/frankfurter
 ```
 
 ### Using Docker Compose
