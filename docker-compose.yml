@@ -19,7 +19,7 @@ services:
       retries: 10
 
   api:
-    image: hakanensari/frankfurter
+    image: lineofflight/frankfurter
     container_name: frankfurter-api
     restart: unless-stopped
     ports:

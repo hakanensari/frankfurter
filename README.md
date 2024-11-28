@@ -4,6 +4,8 @@
 
 [Frankfurter](https://frankfurter.dev) is a free and open-source currency data API that tracks reference exchange rates published by the European Central Bank.
 
+Check the website for a detailed walkthrough.
+
 ## Deployment
 
 ### Using Docker
@@ -40,7 +42,7 @@ Frankfurter is built with Ruby. To contribute:
 
 - [ ] Infrastructure
   - [ ] Migrate from PostgreSQL to SQLite for simpler deployment.
-  - [ ] Add API versioning in URL path.
+  - [x] Add API versioning in URL path.
 
 - [ ] Data Sources
   - [ ] Add support for multiple data providers.
