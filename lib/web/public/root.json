@@ -1,0 +1,9 @@
+{
+  "name": "Frankfurter",
+  "description": "Currency data API",
+  "versions": {
+    "v1": "/v1"
+  },
+  "docs": "https://frankfurter.dev",
+  "source": "https://github.com/lineofflight/frankfurter"
+}

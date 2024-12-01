@@ -10,16 +10,16 @@ describe Web::Server do
   let(:app) { Web::Server.freeze }
   let(:headers) { last_response.headers }
 
-  it "handles root" do
-    get "/"
-    _(last_response).must_be(:ok?)
-    json = Oj.load(last_response.body)
-    _(json["versions"]).must_include("v1")
-    _(json["docs"]).must_equal("https://frankfurter.dev")
+  it "serves static files" do
+    ["/", "/robots.txt"].each do |path|
+      get path
+      _(last_response).must_be(:ok?)
+      _(headers["Cache-Control"]).must_equal("public, max-age=900")
+    end
   end
 
   it "routes /v1 to V1 handler" do
-    get "/v1/"
+    get "/v1/latest"
     _(last_response).must_be(:ok?)
   end
 

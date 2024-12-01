@@ -11,11 +11,6 @@ describe Web::Versions::V1 do
   let(:json) { Oj.load(last_response.body) }
   let(:headers) { last_response.headers }
 
-  it "returns link to docs" do
-    get "/"
-    _(json["docs"]).wont_be_nil
-  end
-
   it "returns latest quotes" do
     get "/latest"
     _(last_response).must_be(:ok?)

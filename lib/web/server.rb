@@ -14,20 +14,17 @@ module Web
       end
     end
 
-    plugin :json
+    opts[:root] = File.expand_path("..", __FILE__)
+    plugin :static,
+      {
+        "/" => "root.json",
+        "/robots.txt" => "robots.txt",
+      },
+      header_rules: [
+        [:all, { "cache-control" => "public, max-age=900" }],
+      ]
 
     route do |r|
-      r.root do
-        {
-          name: "Frankfurter",
-          description: "Currency data API",
-          versions: {
-            "v1" => "/v1",
-          },
-          docs: "https://frankfurter.dev",
-        }
-      end
-
       r.on("v1") do
         r.run(Versions::V1)
       end

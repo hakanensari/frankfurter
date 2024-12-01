@@ -28,16 +28,6 @@ module Web
       route do |r|
         response.cache_control(public: true, max_age: 900)
 
-        # Root route for v1
-        r.root do
-          {
-            name: "Frankfurter",
-            description: "A currency data API",
-            docs: "https://frankfurter.dev",
-            source: "https://github.com/lineofflight/frankfurter",
-          }
-        end
-
         r.is(/latest|current/) do
           r.params["date"] = Date.today.to_s
           quote = quote_end_of_day(r)
