@@ -23,6 +23,10 @@ module Web
       header_rules: [
         [:all, { "cache-control" => "public, max-age=900" }],
       ]
+    plugin :json
+    plugin :not_found do
+      { message: "not found" }
+    end
 
     route do |r|
       r.on("v1") do
