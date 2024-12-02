@@ -1,0 +1,229 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Frankfurter API",
+    "description": "Frankfurter is an open-source API for current and historical foreign exchange rates, sourcing currency data from public providers like the European Central Bank.",
+    "version": "1.0.0",
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/lineofflight/frankfurter/blob/main/LICENSE"
+    },
+    "contact": {
+      "url": "https://github.com/lineofflight/frankfurter/issues"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.frankfurter.dev"
+    }
+  ],
+  "tags": [
+    {
+      "name": "current-rates",
+      "description": "Latest foreign exchange rates"
+    },
+    {
+      "name": "historical-rates",
+      "description": "Historical exchange rates for specific dates and periods"
+    },
+    {
+      "name": "metadata",
+      "description": "API reference data like available currencies"
+    }
+  ],
+  "paths": {
+    "/latest": {
+      "get": {
+        "tags": ["current-rates"],
+        "summary": "Get the latest rates",
+        "description": "Returns the last working day's rates",
+        "parameters": [
+          { "$ref": "#/components/parameters/base" },
+          { "$ref": "#/components/parameters/symbols" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Latest rates",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ExchangeRate" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/{date}": {
+      "get": {
+        "tags": ["historical-rates"],
+        "summary": "Get rates for a past date",
+        "description": "Returns historical rates for the working day closest to the specified date",
+        "parameters": [
+          { "$ref": "#/components/parameters/date" },
+          { "$ref": "#/components/parameters/base" },
+          { "$ref": "#/components/parameters/symbols" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Historical rates",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ExchangeRate" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/{start_date}..{end_date}": {
+      "get": {
+        "tags": ["historical-rates"],
+        "summary": "Get rates for a time period",
+        "description": "Returns historical rates for every day within a time period. The end date defaults to today if not provided.",
+        "parameters": [
+          { "$ref": "#/components/parameters/start_date" },
+          { "$ref": "#/components/parameters/end_date" },
+          { "$ref": "#/components/parameters/base" },
+          { "$ref": "#/components/parameters/symbols" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Historical rates for the period",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "amount": { "type": "number" },
+                    "base": { "type": "string" },
+                    "start_date": { "type": "string", "format": "date" },
+                    "end_date": { "type": "string", "format": "date" },
+                    "rates": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": { "type": "number" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/currencies": {
+      "get": {
+        "tags": ["metadata"],
+        "summary": "Get available currencies",
+        "description": "Returns a list of available currencies with their full names",
+        "responses": {
+          "200": {
+            "description": "List of available currencies",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Currencies" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "base": {
+        "name": "base",
+        "in": "query",
+        "description": "Base currency to convert from",
+        "schema": { "type": "string" },
+        "example": "EUR"
+      },
+      "symbols": {
+        "name": "symbols",
+        "in": "query",
+        "description": "Comma-separated list of currencies to convert to",
+        "schema": { "type": "string" },
+        "example": "USD,GBP"
+      },
+      "date": {
+        "name": "date",
+        "in": "path",
+        "required": true,
+        "description": "Date in YYYY-MM-DD format",
+        "schema": { "type": "string", "format": "date" },
+        "example": "2024-01-19"
+      },
+      "start_date": {
+        "name": "start_date",
+        "in": "path",
+        "required": true,
+        "description": "Start date in YYYY-MM-DD format",
+        "schema": { "type": "string", "format": "date" },
+        "example": "2024-01-01"
+      },
+      "end_date": {
+        "name": "end_date",
+        "in": "path",
+        "required": false,
+        "description": "End date in YYYY-MM-DD format (defaults to today)",
+        "schema": { "type": "string", "format": "date" },
+        "example": "2024-01-20"
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "Resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string", "example": "not found" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ExchangeRate": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "The amount to convert"
+          },
+          "base": { "type": "string", "description": "The base currency code" },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date of the exchange rate"
+          },
+          "rates": {
+            "type": "object",
+            "description": "Exchange rates keyed by currency code",
+            "additionalProperties": { "type": "number" }
+          }
+        }
+      },
+      "Currencies": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string",
+          "description": "Full name of the currency"
+        },
+        "example": {
+          "AUD": "Australian Dollar",
+          "BGN": "Bulgarian Lev",
+          "EUR": "Euro",
+          "USD": "US Dollar"
+        }
+      }
+    }
+  }
+}

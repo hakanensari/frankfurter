@@ -18,6 +18,7 @@ module Web
     plugin :static,
       {
         "/" => "root.json",
+        "/openapi.json" => "openapi.json",
         "/robots.txt" => "robots.txt",
       },
       header_rules: [

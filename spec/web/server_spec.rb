@@ -11,7 +11,7 @@ describe Web::Server do
   let(:headers) { last_response.headers }
 
   it "serves static files" do
-    ["/", "/robots.txt"].each do |path|
+    ["/", "/openapi.json", "/robots.txt"].each do |path|
       get path
       _(last_response).must_be(:ok?)
       _(headers["Cache-Control"]).must_equal("public, max-age=900")
