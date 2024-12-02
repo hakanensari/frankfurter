@@ -18,6 +18,10 @@ describe Day do
     it "returns nothing if date predates dataset" do
       _(Day.latest(Date.parse("1901-01-01"))).must_be_empty
     end
+
+    it "returns nothing if queried for the future" do
+      _(Day.latest(Date.today + 1)).must_be_empty
+    end
   end
 
   describe ".between" do

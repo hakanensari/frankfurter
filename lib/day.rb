@@ -3,6 +3,8 @@
 class Day < Sequel::Model
   dataset_module do
     def latest(date = Date.today)
+      return where(false) if date > Date.today
+
       where(date: _nearest_date_with_rates(date))
     end
 
