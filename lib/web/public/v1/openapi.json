@@ -14,7 +14,7 @@
   },
   "servers": [
     {
-      "url": "https://api.frankfurter.dev"
+      "url": "https://api.frankfurter.dev/v1"
     }
   ],
   "tags": [
