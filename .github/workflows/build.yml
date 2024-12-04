@@ -9,14 +9,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:17
-        env:
-          POSTGRES_HOST_AUTH_METHOD: trust
-        ports:
-          - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -25,8 +17,6 @@ jobs:
       - run: gem install bundler
       - run: bundle install
       - run: bundle exec rake
-        env:
-          DATABASE_URL: postgres://postgres@localhost/postgres
   publish:
     needs: test
     if: ${{ github.event_name == 'push' }}

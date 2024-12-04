@@ -3,7 +3,7 @@
 namespace :db do
   desc "Run database migrations"
   task migrate: :environment do
-    require_relative "../db"
+    require "db"
 
     Sequel.extension(:migration)
     db = Sequel::DATABASES.first

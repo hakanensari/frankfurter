@@ -27,7 +27,28 @@ class Currency < Sequel::Model
     end
 
     def sample(precision)
-      sampler = Sequel.function(:date_trunc, precision, :date)
+      sampler = case precision.to_s
+      when "day"
+        Sequel.function(:strftime, "%Y-%m-%d", :date)
+      when "week"
+        # SQLite's strftime with '%W' gives week number (0-53)
+        # We'll use this to group by week
+        Sequel.function(
+          :date,
+          Sequel.function(
+            :strftime,
+            "%Y-%m-%d",
+            Sequel.function(:strftime, "%Y-01-01", :date),
+            Sequel.lit("'+' || (CAST(strftime('%W', date) AS INTEGER) * 7) || ' days'"),
+          ),
+        )
+      when "month"
+        Sequel.function(:strftime, "%Y-%m-01", :date)
+      when "year"
+        Sequel.function(:strftime, "%Y-01-01", :date)
+      else
+        raise ArgumentError, "Invalid precision: #{precision}. Must be one of: week, month, year, day"
+      end
 
       select(:iso_code)
         .select_append { avg(rate).as(rate) }

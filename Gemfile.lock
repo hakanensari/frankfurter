@@ -21,6 +21,7 @@ GEM
     json (2.8.2)
     kgio (2.11.4)
     language_server-protocol (3.17.0.3)
+    mini_portile2 (2.8.8)
     minitest (5.25.2)
     minitest-around (0.5.0)
       minitest (~> 5.0)
@@ -37,7 +38,6 @@ GEM
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
-    pg (1.5.9)
     public_suffix (6.0.1)
     raabro (1.4.0)
     racc (1.8.1)
@@ -84,9 +84,8 @@ GEM
       fugit (~> 1.1, >= 1.11.1)
     sequel (5.86.0)
       bigdecimal
-    sequel_pg (1.17.1)
-      pg (>= 0.18.0, != 1.2.0)
-      sequel (>= 4.38.0)
+    sqlite3 (2.4.0)
+      mini_portile2 (~> 2.8.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (3.1.2)
@@ -123,7 +122,8 @@ DEPENDENCIES
   rubocop-sequel
   rubocop-shopify
   rufus-scheduler
-  sequel_pg
+  sequel
+  sqlite3
   unicorn
   vcr
   webmock

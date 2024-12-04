@@ -13,19 +13,7 @@ Check the website for a detailed walkthrough.
 The simplest way to run Frankfurter is with Docker:
 
 ```bash
-docker run -d -p 8080:8080 \
-  -e "DATABASE_URL=<postgres_url>" \
-  --name frankfurter lineofflight/frankfurter
-```
-
-### Using Docker Compose
-
-For a complete setup including PostgreSQL:
-
-1. Copy the [docker-compose.yml](./docker-compose.yml) file
-2. Run:
-```bash
-docker compose up --wait
+docker run -d -p 8080:8080 lineofflight/frankfurter
 ```
 
 ## Contributing
@@ -40,8 +28,8 @@ Frankfurter is built with Ruby. To contribute:
 
 ## Roadmap
 
-- [ ] Infrastructure
-  - [ ] Migrate from PostgreSQL to SQLite for simpler deployment.
+- [x] Infrastructure
+  - [x] Migrate from PostgreSQL to SQLite for simpler deployment.
   - [x] Add API versioning in URL path.
 
 - [ ] Data Sources
