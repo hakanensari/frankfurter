@@ -13,7 +13,7 @@ Check the website for a detailed walkthrough.
 The simplest way to run Frankfurter is with Docker:
 
 ```bash
-docker run -d -p 8080:8080 lineofflight/frankfurter
+docker run -d -p 8080:8080 --pull always lineofflight/frankfurter
 ```
 
 ## Contributing
@@ -32,10 +32,9 @@ Frankfurter is built with Ruby. To contribute:
   - [x] Migrate from PostgreSQL to SQLite for simpler deployment.
   - [x] Add API versioning in URL path.
 
-- [ ] Data Sources
-  - [ ] Add support for multiple data providers.
-    - [ ] IMF
-    - [ ] Other central banks
+- [ ] Multiple Data Sources
+  - [ ] IMF
+  - [ ] Other central banks
 
 - [ ] Features
   - [ ] Add GraphQL endpoint.
