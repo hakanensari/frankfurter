@@ -44,10 +44,10 @@ describe "the server" do
   end
 
   it "does not return stale dates" do
-    Day.db.transaction do
+    Currency.db.transaction do
       get "/v1/latest"
       date = json["date"]
-      Day.latest.delete
+      Currency.where(date: Currency.nearest_date_with_rates(Date.today)).delete
       get "/v1/latest"
       _(json["date"]).wont_equal(date)
       raise Sequel::Rollback

@@ -1,47 +1,51 @@
 # frozen_string_literal: true
 
-require "day"
 require "bank/feed"
+require "currency"
 
 module Bank
   class << self
     def fetch_all!
-      data = Feed.historical.to_a
-      jsonify!(data)
-      Day.dataset.insert_conflict.multi_insert(data)
+      data = normalize_data(Feed.historical.to_a)
+      Currency.dataset.insert_conflict.multi_insert(data)
     end
 
     def fetch_ninety_days!
-      data = Feed.ninety_days.to_a
-      jsonify!(data)
-      Day.dataset.insert_conflict.multi_insert(data)
+      data = normalize_data(Feed.ninety_days.to_a)
+      Currency.dataset.insert_conflict.multi_insert(data)
     end
 
     def fetch_current!
-      data = Feed.current.to_a
-      jsonify!(data)
-      Day.find_or_create(data.first)
+      data = normalize_data(Feed.current.to_a)
+      # Use multi_insert only if we have multiple records
+      if data.is_a?(Array)
+        Currency.dataset.insert_conflict.multi_insert(data)
+      end
     end
 
     def replace_all!
-      data = Feed.historical.to_a
-      jsonify!(data)
-      Day.dataset.delete
-      Day.multi_insert(data)
+      data = normalize_data(Feed.historical.to_a)
+      Currency.dataset.delete
+      Currency.multi_insert(data)
     end
 
     def seed_with_saved_data!
-      data = Feed.saved_data.to_a
-      jsonify!(data)
-      Day.dataset.delete
-      Day.multi_insert(data)
+      data = normalize_data(Feed.saved_data.to_a)
+      Currency.dataset.delete
+      Currency.multi_insert(data)
     end
 
     private
 
-    def jsonify!(data)
-      data.each do |day|
-        day[:rates] = Sequel.pg_jsonb(day[:rates])
+    def normalize_data(days)
+      days.flat_map do |day|
+        day[:rates].map do |iso_code, rate|
+          {
+            date: day[:date],
+            iso_code: iso_code,
+            rate: rate,
+          }
+        end
       end
     end
   end
