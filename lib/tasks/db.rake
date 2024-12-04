@@ -2,7 +2,7 @@
 
 namespace :db do
   desc "Run database migrations"
-  task migrate: :environment do
+  task :migrate do
     require "db"
 
     Sequel.extension(:migration)
@@ -20,7 +20,6 @@ namespace :db do
   namespace :test do
     desc "Run database migrations and seed with saved data"
     task :prepare do
-      ENV["APP_ENV"] ||= "test"
       Rake::Task["db:migrate"].invoke
       Rake::Task["rates:seed_with_saved_data"].invoke
     end

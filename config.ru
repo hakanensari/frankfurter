@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-ENV["APP_ENV"] ||= "development"
-
-$LOAD_PATH << File.expand_path("lib", __dir__)
+require_relative "boot"
 require "web/server"
 
 run Web::Server.freeze.app
