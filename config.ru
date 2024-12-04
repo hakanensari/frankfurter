@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "boot"
-require "web/server"
+require "app"
 
-run Web::Server.freeze.app
+run App.freeze.app

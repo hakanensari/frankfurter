@@ -2,12 +2,12 @@
 
 require_relative "helper"
 require "rack/test"
-require "web/server"
+require "app"
 
-describe "the server" do
+describe "the app" do
   include Rack::Test::Methods
 
-  let(:app) { Web::Server.freeze }
+  let(:app) { App.freeze }
 
   def json
     Oj.load(last_response.body)

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative "../../helper"
+require_relative "../helper"
 require "rack/test"
-require "web/versions/v1"
+require "versions/v1"
 
-describe Web::Versions::V1 do
+describe Versions::V1 do
   include Rack::Test::Methods
 
-  let(:app) { Web::Versions::V1.freeze }
+  let(:app) { Versions::V1.freeze }
   let(:json) { Oj.load(last_response.body) }
   let(:headers) { last_response.headers }
 

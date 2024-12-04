@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative "../helper"
+require_relative "helper"
 require "rack/test"
-require "web/server"
+require "app"
 
-describe Web::Server do
+describe App do
   include Rack::Test::Methods
 
-  let(:app) { Web::Server.freeze }
+  let(:app) { App.freeze }
   let(:headers) { last_response.headers }
 
   it "serves static files" do
