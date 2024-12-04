@@ -3,9 +3,11 @@
 namespace :db do
   desc "Run database migrations"
   task migrate: :environment do
+    require_relative "../db"
+
     Sequel.extension(:migration)
     db = Sequel::DATABASES.first
-    dir = App.root.join("db/migrate")
+    dir = File.expand_path("../../db/migrate", __dir__)
     opts = {}
     opts.update(target: ENV["VERSION"].to_i) if ENV["VERSION"]
 

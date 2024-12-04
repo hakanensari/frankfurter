@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 ENV["APP_ENV"] ||= "test"
-
-require_relative "../config/environment"
+$LOAD_PATH << File.expand_path("../lib", __dir__)
 
 require "minitest/autorun"
 require "minitest/around/spec"

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "db"
+
 class Currency < Sequel::Model
   dataset_module do
     def latest(date = Date.today)

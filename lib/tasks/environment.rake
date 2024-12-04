@@ -2,5 +2,5 @@
 
 desc "Load environment"
 task :environment do
-  require "./config/environment"
+  $LOAD_PATH << File.expand_path("..", __dir__)
 end
