@@ -11,7 +11,7 @@ describe App do
   let(:headers) { last_response.headers }
 
   it "serves static files" do
-    ["/", "/robots.txt", "/v1/openapi.json"].each do |path|
+    ["/", "/favicon.ico", "/robots.txt", "/v1/openapi.json"].each do |path|
       get path
       _(last_response).must_be(:ok?)
       _(headers["Cache-Control"]).must_equal("public, max-age=900")

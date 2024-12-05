@@ -17,8 +17,9 @@ class App < Roda
   plugin :static,
     {
       "/" => "root.json",
-      "/v1/openapi.json" => "v1/openapi.json",
+      "/favicon.ico" => "favicon.ico",
       "/robots.txt" => "robots.txt",
+      "/v1/openapi.json" => "v1/openapi.json",
     },
     header_rules: [
       [:all, { "cache-control" => "public, max-age=900" }],
