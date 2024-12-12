@@ -82,11 +82,6 @@ describe Versions::V1 do
     _(json["USD"]).must_equal("United States Dollar")
   end
 
-  it "handles JSONP" do
-    get "/latest?callback=foo"
-    _(last_response.body).must_be(:start_with?, "/**/foo")
-  end
-
   it "sets charset to utf-8" do
     get "/currencies"
     _(last_response.headers["content-type"]).must_be(:end_with?, "charset=utf-8")

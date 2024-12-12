@@ -7,7 +7,6 @@ ruby File.read(".ruby-version").chomp
 gem "money"
 gem "oj"
 gem "ox"
-gem "rack-contrib"
 gem "rack-cors"
 gem "rake"
 gem "roda"

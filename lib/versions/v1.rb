@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "oj"
-require "rack/contrib/jsonp"
 require "roda"
 
 require "currency_names"
@@ -10,8 +9,6 @@ require "quote"
 
 module Versions
   class V1 < Roda
-    use Rack::JSONP
-
     plugin :json,
       content_type: "application/json; charset=utf-8",
       serializer: ->(o) { Oj.dump(o, mode: :compat) }
