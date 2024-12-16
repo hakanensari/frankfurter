@@ -2,19 +2,21 @@
 
 [![Build](https://github.com/lineofflight/frankfurter/workflows/build/badge.svg)](https://github.com/lineofflight/frankfurter/actions)
 
-[Frankfurter](https://frankfurter.dev) is a free and open-source currency data API that tracks reference exchange rates published by the European Central Bank.
+[Frankfurter](https://frankfurter.dev) is a free and open-source currency data API that tracks reference exchange rates published by institutional and non-commercial sources like the European Central Bank. Check the website for a detailed walkthrough.
 
-Check the website for a detailed walkthrough.
+The API is publicly available at [https://api.frankfurter.dev][].
 
 ## Deployment
 
 ### Using Docker
 
-The simplest way to run Frankfurter is with Docker:
+The simplest way to run Frankfurter locally is with Docker:
 
 ```bash
-docker run -d -p 8080:8080 --pull always lineofflight/frankfurter
+docker run -d -p 80:8080 lineofflight/frankfurter
 ```
+
+Once the container is running, open your browser and go to `http://localhost`.
 
 ## Contributing
 
@@ -28,14 +30,12 @@ Frankfurter is built with Ruby. To contribute:
 
 ## Roadmap
 
-- [x] Infrastructure
-  - [x] Migrate from PostgreSQL to SQLite for simpler deployment.
-  - [x] Add API versioning in URL path.
-
+- [x] Migrate to SQLite
+- [x] Add API versioning in path
 - [ ] Multiple Data Sources
-  - [ ] IMF
-  - [ ] Other central banks
+- [ ] Add GraphQL endpoint
+- [ ] Deploy as a blockchain oracle
 
-- [ ] Features
-  - [ ] Add GraphQL endpoint.
-  - [ ] Deploy as a blockchain oracle.
+### Reporting Missing Currencies
+
+If you notice a currency missing from our data, please open an issue and include a suggested source with the missing data. We're looking for non-commercial sources like the European Central Bank that publish current and historical daily rates at the end of each working day.
